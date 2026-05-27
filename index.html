@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amal Imangulov</title>
+<style>
+:root {
+  --bg: #0a0e1a;
+  --card-bg: #151d30;
+  --card-bg-hover: #1a2440;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --accent: #1877F2;
+  --accent-glow: rgba(24,119,242,0.15);
+  --green: #02e2ac;
+  --green-dim: rgba(2,226,172,0.12);
+  --orange: #f59e0b;
+  --orange-dim: rgba(245,158,11,0.12);
+  --purple: #a855f7;
+  --purple-dim: rgba(168,85,247,0.12);
+  --nav-bg: rgba(10,14,26,0.92);
+  --hero-from: #0a0e1a;
+  --hero-to: #162544;
+}
+[data-theme="light"] {
+  --bg: #fafbfc;
+  --card-bg: #ffffff;
+  --card-bg-hover: #f0f2f5;
+  --border: #e4e6ea;
+  --text: #1a1a2e;
+  --text-muted: #4a5568;
+  --text-dim: #718096;
+  --accent: #1877F2;
+  --accent-glow: rgba(24,119,242,0.08);
+  --green: #02c39b;
+  --green-dim: rgba(2,195,155,0.08);
+  --orange: #e08a00;
+  --orange-dim: rgba(224,138,0,0.08);
+  --purple: #7c3aed;
+  --purple-dim: rgba(124,58,237,0.08);
+  --nav-bg: rgba(250,251,252,0.95);
+  --hero-from: #e8f0fe;
+  --hero-to: #d2e3fc;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.theme-toggle {
+  position: fixed; top: 16px; right: 16px; z-index: 200;
+  background: var(--card-bg); border: 1px solid var(--border);
+  color: var(--text); padding: 8px 14px; border-radius: 20px;
+  cursor: pointer; font-size: 14px; transition: all 0.2s;
+}
+.theme-toggle:hover { border-color: var(--accent); }
+
+.hero {
+  background: linear-gradient(135deg, var(--hero-from) 0%, var(--hero-to) 100%);
+  padding: 80px 24px 60px;
+  text-align: center;
+  border-bottom: 3px solid var(--accent);
+}
+.hero h1 {
+  font-size: 2.8em;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+.hero h1 span { color: var(--accent); }
+.hero .subtitle {
+  font-size: 1.2em;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+.hero .links {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+}
+.hero .links a {
+  color: var(--text-muted);
+  padding: 8px 20px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+.hero .links a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-glow);
+  text-decoration: none;
+}
+
+.container { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
+
+.section-title {
+  font-size: 1.4em;
+  font-weight: 600;
+  margin-bottom: 24px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border);
+}
+
+.projects { display: grid; gap: 20px; }
+
+.project-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  transition: all 0.25s;
+  display: block;
+  cursor: pointer;
+}
+.project-card:hover {
+  background: var(--card-bg-hover);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  text-decoration: none;
+}
+.project-card .card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.project-card .card-icon {
+  font-size: 1.6em;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+.project-card h3 {
+  font-size: 1.15em;
+  font-weight: 600;
+  color: var(--text);
+}
+.project-card p {
+  color: var(--text-muted);
+  font-size: 0.95em;
+  margin-bottom: 14px;
+}
+.project-card .tags {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.project-card .tag {
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+.tag-data { background: var(--green-dim); color: var(--green); }
+.tag-viz { background: var(--purple-dim); color: var(--purple); }
+.tag-quiz { background: var(--orange-dim); color: var(--orange); }
+.tag-live { background: var(--accent-glow); color: var(--accent); }
+
+.icon-green { background: var(--green-dim); }
+.icon-purple { background: var(--purple-dim); }
+.icon-orange { background: var(--orange-dim); }
+.icon-accent { background: var(--accent-glow); }
+
+.about {
+  margin-top: 48px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+}
+.about h2 { font-size: 1.2em; margin-bottom: 12px; }
+.about p { color: var(--text-muted); font-size: 0.95em; margin-bottom: 8px; }
+
+footer {
+  text-align: center;
+  padding: 32px 24px;
+  color: var(--text-dim);
+  font-size: 13px;
+  border-top: 1px solid var(--border);
+  margin-top: 48px;
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 48px 16px 36px; }
+  .hero h1 { font-size: 2em; }
+  .container { padding: 32px 16px; }
+  .project-card { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+  <span id="theme-icon">&#9790;</span>
+</button>
+
+<section class="hero">
+  <h1>Amal <span>Imangulov</span></h1>
+  <p class="subtitle">Data engineer. Quiz enthusiast. Building things with data.</p>
+  <div class="links">
+    <a href="https://github.com/ImangulovA">GitHub</a>
+    <a href="https://www.linkedin.com/in/imangulov/">LinkedIn</a>
+    <a href="https://t.me/nevezhda">Telegram</a>
+  </div>
+</section>
+
+<div class="container">
+  <h2 class="section-title">Projects</h2>
+  <div class="projects">
+
+    <a class="project-card" href="/chgk-worldwide/">
+      <div class="card-header">
+        <div class="card-icon icon-green">&#127758;</div>
+        <h3>World Quiz Championships</h3>
+      </div>
+      <p>Statistics dashboard for national quiz championships across 22 countries. Player ratings, team rankings, tournament history.</p>
+      <div class="tags">
+        <span class="tag tag-data">data</span>
+        <span class="tag tag-viz">visualization</span>
+        <span class="tag tag-live">live</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="/chvb-stats/">
+      <div class="card-header">
+        <div class="card-icon icon-accent">&#127468;&#127463;</div>
+        <h3>UK Quiz Championships</h3>
+      </div>
+      <p>Comprehensive statistics for UK quiz championships. Team performance, historical trends, player analytics.</p>
+      <div class="tags">
+        <span class="tag tag-data">data</span>
+        <span class="tag tag-viz">visualization</span>
+        <span class="tag tag-live">live</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="/chgkvibecoding/">
+      <div class="card-header">
+        <div class="card-icon icon-orange">&#127922;</div>
+        <h3>Quiz Tools</h3>
+      </div>
+      <p>Bingo card generator, channel analytics, and other interactive tools for the quiz community.</p>
+      <div class="tags">
+        <span class="tag tag-quiz">quiz</span>
+        <span class="tag tag-viz">interactive</span>
+        <span class="tag tag-live">live</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="https://github.com/ImangulovA/Iokoviz">
+      <div class="card-header">
+        <div class="card-icon icon-purple">&#128202;</div>
+        <h3>Tournament Visualizer</h3>
+      </div>
+      <p>Animated tournament progress visualization. Real-time score tracking for top teams, tour analysis, D3.js charts.</p>
+      <div class="tags">
+        <span class="tag tag-data">data</span>
+        <span class="tag tag-viz">visualization</span>
+        <span class="tag tag-viz">python</span>
+      </div>
+    </a>
+
+  </div>
+
+  <section class="about">
+    <h2>About</h2>
+    <p>I'm a data engineer based in London. I work with data pipelines, analytics, and infrastructure at scale.</p>
+    <p>Outside of work, I'm deep into the quiz world: playing, writing questions, and building tools for the community. Most of my projects are about making quiz data more accessible and fun to explore.</p>
+  </section>
+</div>
+
+<footer>
+  Amal Imangulov &middot; 2025
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  document.getElementById('theme-icon').innerHTML = next === 'dark' ? '&#9790;' : '&#9728;';
+}
+(function() {
+  const saved = localStorage.getItem('theme');
+  if (saved) {
+    document.documentElement.setAttribute('data-theme', saved);
+    document.getElementById('theme-icon').innerHTML = saved === 'dark' ? '&#9790;' : '&#9728;';
+  }
+})();
+</script>
+
+</body>
+</html>
