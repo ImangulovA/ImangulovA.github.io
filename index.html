@@ -179,6 +179,17 @@ a:hover { text-decoration: underline; }
 .icon-orange { background: var(--orange-dim); }
 .icon-accent { background: var(--accent-glow); }
 
+.card-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2px; }
+.card-links a {
+  padding: 7px 16px; border: 1px solid var(--border); border-radius: 20px;
+  font-size: 13px; color: var(--text-muted); transition: all 0.2s;
+}
+.card-links a:hover {
+  border-color: var(--accent); color: var(--accent);
+  background: var(--accent-glow); text-decoration: none;
+}
+.card-links a small { color: var(--text-dim); font-size: 11px; }
+
 .about {
   margin-top: 48px;
   background: var(--card-bg);
@@ -286,6 +297,23 @@ footer {
 
   <h2 class="section-title" style="margin-top:48px;">Projects</h2>
   <div class="projects">
+
+    <div class="project-card">
+      <div class="card-header">
+        <div class="card-icon icon-accent">&#128031;</div>
+        <h3>ru-catfishing</h3>
+      </div>
+      <p>A daily &ldquo;guess the Wikipedia article from its categories&rdquo; game (Russian). 10 puzzles a day, one shot each. Built with SvelteKit; answers never ship in plaintext.</p>
+      <div class="tags" style="margin-bottom:16px;">
+        <span class="tag tag-quiz">game</span>
+        <span class="tag tag-viz">interactive</span>
+        <span class="tag tag-live">live</span>
+      </div>
+      <div class="card-links">
+        <a href="https://imangulova.github.io/ru-catfishing/">&#9654;&nbsp; Play</a>
+        <a href="https://imangulova.github.io/ru-catfishing/internals.html">&#128296;&nbsp; How it's made <small>&middot; Как это сделано</small></a>
+      </div>
+    </div>
 
     <a class="project-card" href="/chgk-worldwide/">
       <div class="card-header">
