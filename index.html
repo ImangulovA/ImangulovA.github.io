@@ -336,25 +336,124 @@ footer {
 
   </div>
 
-  <h2 class="section-title" style="margin-top:48px;">Projects</h2>
+  <h2 class="section-title" style="margin-top:48px;">Daily Games</h2>
+  <p style="color:var(--text-muted); margin-top:-12px; margin-bottom:24px; font-size:0.95em;">Small browser puzzles I build and play every day: hand-rolled generators, no-guess solvers, streak tracking and shareable results. All static, offline-friendly, no accounts.</p>
   <div class="projects">
 
-    <div class="project-card">
+    <a class="project-card featured" href="/games/">
+      <div class="card-header">
+        <div class="card-icon icon-accent">&#127918;</div>
+        <h3>Daily Games Hub</h3>
+      </div>
+      <p>An NYT-Games-style launcher for all my daily puzzles. One page, one place to keep your streaks: pick a game and play today's board.</p>
+      <div class="tags">
+        <span class="tag tag-quiz">games</span>
+        <span class="tag tag-viz">interactive</span>
+        <span class="tag tag-live">live</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="subgrid">
+
+    <a class="project-card sm" href="/train-tracks/">
+      <div class="card-header">
+        <div class="card-icon icon-accent">&#128642;</div>
+        <h3>Train Tracks</h3>
+      </div>
+      <p>Daily railroad-path puzzle: lay tracks to connect the two edges. Own no-guess generator and solver, calendar archive, time-percentile stats.</p>
+    </a>
+
+    <a class="project-card sm" href="/battleships/">
+      <div class="card-header">
+        <div class="card-icon icon-purple">&#128674;</div>
+        <h3>Battleships</h3>
+      </div>
+      <p>Daily Bimaru (solitaire Battleships): place the fleet from the row and column counts. Own no-guess generator and solver, English UI.</p>
+    </a>
+
+    <a class="project-card sm" href="/anagram-daily/">
+      <div class="card-header">
+        <div class="card-icon icon-green">&#128290;</div>
+        <h3>Anagram Daily</h3>
+      </div>
+      <p>Two clued words whose letters rearrange into a third clued word. English, 20-point hint scoring, one puzzle a day.</p>
+    </a>
+
+    <a class="project-card sm" href="/ru-anagram-daily/">
+      <div class="card-header">
+        <div class="card-icon icon-orange">&#128289;</div>
+        <h3>Анаграмма дня</h3>
+      </div>
+      <p>Russian (Cyrillic) anagram game: two clued words anagram into a third. Crossword-style clues, strict &laquo;Ё&raquo;, daily board.</p>
+    </a>
+
+    <a class="project-card sm" href="/ru-catfishing/">
       <div class="card-header">
         <div class="card-icon icon-accent">&#128031;</div>
         <h3>ru-catfishing</h3>
       </div>
-      <p>A daily &ldquo;guess the Wikipedia article from its categories&rdquo; game (Russian). 10 puzzles a day, one shot each. Built with SvelteKit; answers never ship in plaintext.</p>
-      <div class="tags" style="margin-bottom:16px;">
-        <span class="tag tag-quiz">game</span>
-        <span class="tag tag-viz">interactive</span>
+      <p>Guess the Wikipedia article from its categories (Russian). 10 puzzles a day, one shot each; answers never ship in plaintext.</p>
+    </a>
+
+    <a class="project-card sm" href="/balatrivia/">
+      <div class="card-header">
+        <div class="card-icon icon-purple">&#127183;</div>
+        <h3>Balatrivia</h3>
+      </div>
+      <p>A Balatro-flavoured trivia roguelike: answer questions, build combos, chase a high score run.</p>
+    </a>
+
+  </div>
+
+  <h2 class="section-title" style="margin-top:48px;">Data Stories &amp; Research</h2>
+  <p style="color:var(--text-muted); margin-top:-12px; margin-bottom:24px; font-size:0.95em;">Side data projects: scrape, crunch, and turn the numbers into a single self-contained interactive page.</p>
+  <div class="projects">
+
+    <a class="project-card" href="/chgk-vocab/">
+      <div class="card-header">
+        <div class="card-icon icon-green">&#128218;</div>
+        <h3>Лексикон ЧГК</h3>
+      </div>
+      <p>Vocabulary richness of quiz-question authors, à la the Russian-rappers lexicon study. 6,701 packs, 436k questions, 149 reliable authors, ranked in one interactive infographic.</p>
+      <div class="tags">
+        <span class="tag tag-data">data</span>
+        <span class="tag tag-viz">infographic</span>
         <span class="tag tag-live">live</span>
       </div>
-      <div class="card-links">
-        <a href="https://imangulova.github.io/ru-catfishing/">&#9654;&nbsp; Play</a>
-        <a href="https://imangulova.github.io/ru-catfishing/internals.html">&#128296;&nbsp; How it's made <small>&middot; Как это сделано</small></a>
+    </a>
+
+    <a class="project-card" href="/standup-research/">
+      <div class="card-header">
+        <div class="card-icon icon-orange">&#127908;</div>
+        <h3>Stand-up Lexicon</h3>
       </div>
-    </div>
+      <p>How rich is the vocabulary of Russian stand-up comics? 321 concerts scraped and lemmatised, measured on a 25k-lemma metric, and ranked head to head.</p>
+      <div class="tags">
+        <span class="tag tag-data">data</span>
+        <span class="tag tag-viz">infographic</span>
+        <span class="tag tag-live">live</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="/duckcon7-recaps/">
+      <div class="card-header">
+        <div class="card-icon icon-accent">&#129414;</div>
+        <h3>DuckCon #7 Recaps</h3>
+      </div>
+      <p>All 13 DuckCon #7 talks turned into fast, self-contained HTML recaps: the key ideas from each session without watching hours of video.</p>
+      <div class="tags">
+        <span class="tag tag-data">DuckDB</span>
+        <span class="tag tag-viz">recaps</span>
+        <span class="tag tag-live">live</span>
+      </div>
+    </a>
+
+  </div>
+
+  <h2 class="section-title" style="margin-top:48px;">Quiz Statistics &amp; Tools</h2>
+  <div class="projects">
 
     <a class="project-card" href="/chgk-worldwide/">
       <div class="card-header">
