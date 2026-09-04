@@ -64,6 +64,15 @@
     .ticker{text-align:center}
   }
 
+  .topline{display:flex;justify-content:space-between;align-items:baseline;gap:14px 22px;flex-wrap:wrap}
+  .lang{
+    font-family:"Inter",system-ui,sans-serif;font-size:11px;font-weight:500;
+    letter-spacing:.24em;text-transform:uppercase;
+    color:var(--ink-faint);text-decoration:none;
+    border-bottom:1px solid var(--rust);padding-bottom:2px;white-space:nowrap;
+  }
+  .lang:hover,.lang:focus-visible{color:var(--rust-deep)}
+
   /* ── шапка ── */
   header.mast{padding:60px 0 34px;border-bottom:1px solid var(--rule)}
   header.mast h1{
@@ -210,7 +219,10 @@
 <div class="wrap">
 
   <header class="mast">
-    <span class="tracked">Досье по одному автору &middot; собрано 4 сентября 2026</span>
+    <div class="topline">
+      <span class="tracked">Досье по одному автору &middot; собрано 4 сентября 2026</span>
+      <a class="lang" href="ai-design-aesthetic-en.html">Read in English</a>
+    </div>
     <h1>Бежевый <span>интернет</span></h1>
     <p class="standfirst">Кайл Чайка, штатный автор The New Yorker, описал внешность, к которой сходятся сайты, сделанные с помощью ИИ, — и указал на её источник. Здесь собрано, что именно он утверждает и где это читать. <em class="hl">Страница нарочно свёрстана в разбираемом стиле: каждый приём из списка применён к ней самой.</em></p>
     <div class="byline">

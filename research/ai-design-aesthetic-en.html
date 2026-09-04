@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}</style>
+<title>The Beige Internet</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,600;1,6..72,400&family=Inter:wght@400;500&display=swap">
+<style>
+  /* This page is deliberately set in the very style it examines:
+     one theme, warm paper, no toggle — that is the point. */
+  :root{
+    --cream:#faf7f0;
+    --cream-2:#f3ede1;
+    --card:#fffdf8;
+    --ink:#2b2620;
+    --ink-soft:#6b6055;
+    --ink-faint:#a2978a;
+    --rust:#c2643a;
+    --rust-deep:#9e4526;
+    --rust-glow:rgba(194,100,58,.28);
+    --rule:#e0d6c4;
+    --measure:62ch;
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:"Newsreader",Georgia,"Times New Roman",serif;
+    font-size:18px;line-height:1.68;font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:940px;margin:0 auto;padding:0 26px 100px}
+
+  /* ── tell: tracked-out subheadings ── */
+  .tracked{
+    font-family:"Inter",system-ui,sans-serif;
+    font-size:11px;font-weight:500;
+    letter-spacing:.34em;text-transform:uppercase;
+    color:var(--rust);
+  }
+  .tracked.mute{color:var(--ink-faint)}
+
+  /* ── tell: the news ticker ── */
+  .ticker{
+    background:var(--rust-deep);
+    overflow:hidden;white-space:nowrap;
+    border-bottom:1px solid rgba(0,0,0,.12);
+  }
+  .ticker-track{
+    display:inline-flex;gap:0;
+    animation:slide 38s linear infinite;
+    will-change:transform;
+  }
+  .ticker span{
+    font-family:"Inter",sans-serif;font-size:11px;font-weight:500;
+    letter-spacing:.24em;text-transform:uppercase;color:#f7e7dc;
+    padding:9px 0;
+  }
+  .ticker span::after{content:"◆";margin:0 26px;color:#e0a181}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){
+    .ticker-track{animation:none}
+    .ticker{text-align:center}
+  }
+
+  .topline{display:flex;justify-content:space-between;align-items:baseline;gap:14px 22px;flex-wrap:wrap}
+  .lang{
+    font-family:"Inter",system-ui,sans-serif;font-size:11px;font-weight:500;
+    letter-spacing:.24em;text-transform:uppercase;
+    color:var(--ink-faint);text-decoration:none;
+    border-bottom:1px solid var(--rust);padding-bottom:2px;white-space:nowrap;
+  }
+  .lang:hover,.lang:focus-visible{color:var(--rust-deep)}
+
+  /* ── masthead ── */
+  header.mast{padding:60px 0 34px;border-bottom:1px solid var(--rule)}
+  header.mast h1{
+    font-family:"Instrument Serif",Georgia,serif;
+    font-weight:400;font-style:italic;
+    font-size:clamp(3.2rem,10vw,6.4rem);
+    line-height:.92;letter-spacing:-.015em;
+    margin:22px 0 0;text-wrap:balance;
+  }
+  header.mast h1 span{font-style:normal;color:var(--rust)}
+  .standfirst{
+    max-width:var(--measure);
+    font-size:1.22rem;color:var(--ink-soft);
+    margin:22px 0 0;font-weight:300;
+  }
+  .byline{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px 26px;align-items:baseline}
+
+  /* ── general typography ── */
+  section{padding-top:60px}
+  .sec-head{margin-bottom:28px}
+  h2{
+    font-family:"Instrument Serif",Georgia,serif;
+    font-weight:400;font-style:italic;
+    font-size:clamp(1.9rem,4.4vw,2.7rem);
+    line-height:1.06;letter-spacing:-.01em;
+    margin:10px 0 0;text-wrap:balance;
+  }
+  p{margin:0 0 1.05em;max-width:var(--measure)}
+  p:last-child{margin-bottom:0}
+  em.hl{font-style:italic;color:var(--rust-deep)}
+
+  /* ── tell: glowing dashboard tiles ── */
+  .tells{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(246px,1fr));
+    gap:16px;
+  }
+  .tell{
+    background:var(--card);
+    border:1px solid var(--rule);
+    border-radius:18px;
+    padding:20px 22px 22px;
+    box-shadow:0 0 0 6px rgba(255,255,255,.55),0 14px 34px -18px var(--rust-glow);
+    display:flex;flex-direction:column;gap:9px;
+    position:relative;
+  }
+  .tell::before{
+    content:"";position:absolute;inset:6px;border-radius:13px;
+    border:1px solid rgba(194,100,58,.16);pointer-events:none;
+  }
+  .tell .num{
+    font-family:"Inter",sans-serif;font-size:10.5px;font-weight:500;
+    letter-spacing:.22em;color:var(--rust);
+  }
+  .tell h3{
+    font-family:"Instrument Serif",Georgia,serif;font-weight:400;
+    font-size:1.36rem;line-height:1.15;margin:0;
+  }
+  .tell p{font-size:.98rem;color:var(--ink-soft);margin:0;font-weight:300}
+  .tell .self{
+    margin-top:4px;padding-top:9px;border-top:1px dashed var(--rule);
+    font-family:"Inter",sans-serif;font-size:10.5px;letter-spacing:.06em;
+    color:var(--ink-faint);text-transform:uppercase;
+  }
+
+  /* ── quotes ── */
+  .voices{display:flex;flex-direction:column;gap:34px}
+  blockquote{margin:0;max-width:var(--measure)}
+  blockquote p{
+    font-family:"Instrument Serif",Georgia,serif;
+    font-style:italic;font-size:1.6rem;line-height:1.28;
+    color:var(--ink);margin:0;
+  }
+  blockquote footer{
+    margin-top:12px;
+    font-family:"Inter",sans-serif;font-size:11px;font-weight:500;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);
+  }
+
+  .admission{
+    background:var(--cream-2);
+    border:1px solid rgba(194,100,58,.35);
+    border-radius:22px;
+    padding:34px 36px;
+    box-shadow:0 18px 46px -26px var(--rust-glow);
+  }
+  .admission q{
+    display:block;quotes:none;
+    font-family:"Instrument Serif",Georgia,serif;font-style:italic;
+    font-size:clamp(1.5rem,3.6vw,2.2rem);line-height:1.2;
+    color:var(--rust-deep);text-wrap:balance;
+  }
+  .admission .src{margin:18px 0 0;color:var(--ink-soft);font-size:1rem;font-weight:300}
+
+  /* ── bibliography ── */
+  ul.res{list-style:none;margin:0;padding:0}
+  ul.res li{
+    border-top:1px solid var(--rule);padding:20px 0;
+    display:grid;grid-template-columns:120px 1fr;gap:5px 24px;align-items:baseline;
+  }
+  ul.res li:last-child{border-bottom:1px solid var(--rule)}
+  ul.res a{
+    grid-column:2;
+    font-family:"Instrument Serif",Georgia,serif;font-style:italic;
+    font-size:1.42rem;line-height:1.2;
+    color:var(--ink);text-decoration:none;
+    border-bottom:1px solid var(--rust);
+  }
+  ul.res a:hover,ul.res a:focus-visible{color:var(--rust-deep)}
+  ul.res .note{grid-column:2;color:var(--ink-soft);font-size:.98rem;font-weight:300;max-width:60ch}
+  ul.res .url{
+    grid-column:2;font-family:"Inter",sans-serif;font-size:11px;
+    letter-spacing:.05em;color:var(--ink-faint);word-break:break-all;
+  }
+  a:focus-visible{outline:2px solid var(--rust);outline-offset:4px}
+
+  .fineprint{
+    margin-top:54px;padding:22px 24px;
+    background:var(--cream-2);border-radius:14px;
+    color:var(--ink-soft);font-size:.94rem;font-weight:300;max-width:var(--measure);
+  }
+  .fineprint code{font-family:"Inter",monospace;font-size:.85rem;color:var(--rust-deep)}
+
+  .colophon{
+    margin-top:40px;padding-top:22px;border-top:1px solid var(--rule);
+    max-width:var(--measure);color:var(--ink-soft);font-size:.98rem;font-weight:300;
+  }
+  .colophon strong{color:var(--rust-deep);font-weight:600}
+
+  @media (max-width:600px){
+    ul.res li{grid-template-columns:1fr}
+    ul.res a,ul.res .note,ul.res .url{grid-column:1}
+  }
+</style>
+
+</head>
+<body>
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Beige ground</span><span>Rust accent</span><span>Oversized serif</span><span>Italics instead of an argument</span><span>Tracked-out caps</span><span>News ticker</span><span>Glow on every edge</span>
+    <span>Beige ground</span><span>Rust accent</span><span>Oversized serif</span><span>Italics instead of an argument</span><span>Tracked-out caps</span><span>News ticker</span><span>Glow on every edge</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="topline">
+      <span class="tracked">A dossier on one writer &middot; compiled 4 September 2026</span>
+      <a class="lang" href="ai-design-aesthetic.html">Читать по-русски</a>
+    </div>
+    <h1>The Beige <span>Internet</span></h1>
+    <p class="standfirst">Kyle Chayka, a staff writer at The New Yorker, described the look that AI-built websites keep converging on — and named where it comes from. This page collects what he actually claims and where to read it. <em class="hl">It is set in the style under discussion on purpose: every tell on the list is applied to the page itself.</em></p>
+    <div class="byline">
+      <span class="tracked mute">Kyle Chayka</span>
+      <span class="tracked mute">The New Yorker &middot; the Kyle Chayka Industries newsletter</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <span class="tracked">The claim</span>
+      <h2>One house style leaked into everything</h2>
+    </div>
+    <p>Chayka is not making the broad point that AI makes ugly things. His point is narrower: one particular model has a persistent default taste, and that taste matches the brand of the company that built it. Because the model is used at scale to build landing pages, decks and dashboards, one vendor&rsquo;s house style now reads as the house style of the current web.</p>
+    <p>He has been on this beat for a while — his book <em>Filterworld</em> is about the way algorithmic platforms flatten culture. This piece is the same argument moved from the recommendation feed to interface generation.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tracked">The evidence</span>
+      <h2>Six tells &mdash; and where each one sits on this page</h2>
+    </div>
+    <div class="tells">
+      <div class="tell">
+        <span class="num">TELL 01 &middot; GROUND</span>
+        <h3>Beige and cream</h3>
+        <p>Not white, not charcoal — a warm paper tone specifically.</p>
+        <span class="self">You are looking at it: #faf7f0</span>
+      </div>
+      <div class="tell">
+        <span class="num">TELL 02 &middot; COLOR</span>
+        <h3>Rust-orange accent</h3>
+        <p>Muted terracotta in place of blue or violet.</p>
+        <span class="self">Every accent here: #c2643a</span>
+      </div>
+      <div class="tell">
+        <span class="num">TELL 03 &middot; TYPE</span>
+        <h3>Oversized italic serif</h3>
+        <p>A large serif face, with italics doing the work of emphasis.</p>
+        <span class="self">All headings are Instrument Serif Italic</span>
+      </div>
+      <div class="tell">
+        <span class="num">TELL 04 &middot; SETTING</span>
+        <h3>Tracked-out subheads</h3>
+        <p>Conspicuous letter-spacing on the small labels above each block.</p>
+        <span class="self">The word &ldquo;EVIDENCE&rdquo; above sits at .34em</span>
+      </div>
+      <div class="tell">
+        <span class="num">TELL 05 &middot; ELEMENT</span>
+        <h3>The news ticker</h3>
+        <p>A scrolling text bar borrowed from cable news.</p>
+        <span class="self">Running along the top of this page</span>
+      </div>
+      <div class="tell">
+        <span class="num">TELL 06 &middot; ELEMENT</span>
+        <h3>Glowing dashboard tiles</h3>
+        <p>Nested rounded outlines with a soft halo around them.</p>
+        <span class="self">The tile you are reading is exactly that</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tracked">Who he quotes</span>
+      <h2>Designers speaking in the piece</h2>
+    </div>
+    <div class="voices">
+      <blockquote>
+        <p>Rounded rectangular dashboard panels with neon glow — a recognisable, endlessly repeated motif.</p>
+        <footer>David McGillivray, designer &mdash; as reported in the article</footer>
+      </blockquote>
+      <blockquote>
+        <p>&ldquo;Tasteful, slightly askew&rdquo; primary colors and desaturated mid-century modernist hues.</p>
+        <footer>Celine Nguyen &mdash; as reported in the article</footer>
+      </blockquote>
+      <blockquote>
+        <p>Beige backgrounds, rust-red text, overzealous serifs.</p>
+        <footer>Kyle Chayka, post on X, December 2025</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tracked">The key exhibit</span>
+      <h2>The vendor says so itself</h2>
+    </div>
+    <div class="admission">
+      <q>The model has strong design instincts, with a consistent default house style. This default is persistent.</q>
+      <p class="src">A line from Anthropic&rsquo;s own guidance, which Chayka cites as confirmation: the set of tells he lists is not a quirk of his sample but a stated property of the tool. He then notes that those tells match Anthropic&rsquo;s own branding.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tracked">The conclusion</span>
+      <h2>The default goes to whoever doesn&rsquo;t push back</h2>
+    </div>
+    <p>Leave the model unchallenged and you get the generic result — <em class="hl">&ldquo;the lowest common acceptable denominator of aesthetics and taste.&rdquo;</em> The designers Chayka spoke to think distinctive work with AI is still possible, but that it costs real labour: mood boards, hand sketches, many iterations. The cure is not a different model; it is what you bring to the brief.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tracked">Bibliography</span>
+      <h2>Where to read it</h2>
+    </div>
+    <ul class="res">
+      <li>
+        <span class="tracked mute">Source</span>
+        <a href="https://www.newyorker.com/" target="_blank" rel="noopener">The A.I.-Design Aesthetic That&rsquo;s Taking Over the Internet</a>
+        <span class="note">The original New Yorker piece — the one that put this description into circulation.</span>
+        <span class="url">newyorker.com &middot; paywalled</span>
+      </li>
+      <li>
+        <span class="tracked mute">Open version</span>
+        <a href="https://kylechayka.substack.com/p/the-generic-style-of-ai-web-design" target="_blank" rel="noopener">The generic style of AI web design</a>
+        <span class="note">His own newsletter: the same material outside the paywall, with examples. Nearly everything on this page comes from here.</span>
+        <span class="url">kylechayka.substack.com/p/the-generic-style-of-ai-web-design</span>
+      </li>
+      <li>
+        <span class="tracked mute">Short form</span>
+        <a href="https://x.com/chaykak/status/2069787733648723979" target="_blank" rel="noopener">Post on X: &ldquo;Beige backgrounds, rust-red text&hellip;&rdquo;</a>
+        <span class="note">The whole thesis in one line — convenient to quote.</span>
+        <span class="url">x.com/chaykak</span>
+      </li>
+      <li>
+        <span class="tracked mute">Response</span>
+        <a href="https://visualgui.com/2026/06/24/a-i-web-design/" target="_blank" rel="noopener">A.I. Web Design — Visual Guidelines</a>
+        <span class="note">A working web typographer&rsquo;s reading of the same phenomenon.</span>
+        <span class="url">visualgui.com/2026/06/24/a-i-web-design/</span>
+      </li>
+      <li>
+        <span class="tracked mute">Response</span>
+        <a href="https://www.nicksimson.com/posts/2026-the-vibes-are-off.html" target="_blank" rel="noopener">The vibes are off — Nick Simson</a>
+        <span class="note">On why a recognisable default devalues the work in the reader&rsquo;s eyes.</span>
+        <span class="url">nicksimson.com/posts/2026-the-vibes-are-off.html</span>
+      </li>
+      <li>
+        <span class="tracked mute">Coverage</span>
+        <a href="https://northeasttimes.com/2026/07/31/ai-design-tools-are-making-every-website-look-the-same/" target="_blank" rel="noopener">AI design tools are making every website look the same</a>
+        <span class="note">A newspaper retelling of the argument for a general audience.</span>
+        <span class="url">northeasttimes.com &middot; 31 July 2026</span>
+      </li>
+      <li>
+        <span class="tracked mute">Coverage</span>
+        <a href="https://letsdatascience.com/news/anthropics-claude-design-shapes-new-design-aesthetic-aaf43749" target="_blank" rel="noopener">Anthropic&rsquo;s Claude Design Shapes New Design Aesthetic</a>
+        <span class="note">A news item working from the same material.</span>
+        <span class="url">letsdatascience.com</span>
+      </li>
+    </ul>
+
+    <p class="fineprint">A note on sourcing: the specific values usually quoted alongside this story — ground <code>#faf9f5</code>, coral accent <code>#cc785c</code>, dark <code>#141413</code>, the Copernicus typeface — do not come from Chayka but from design-system references for Anthropic (shadcn.io/design/claude, shadcn.io/design/anthropic). Chayka describes the tells in words, without tokens.</p>
+
+    <p class="colophon"><strong>Colophon.</strong> The cream ground, rust accent, oversized italic serif, tracked-out caps, news ticker and glowing rounded tiles are used here deliberately — as an exhibit, not as taste. The page has a single theme and no dark mode: a dark variant would dissolve the subject.</p>
+  </section>
+
+</div>
+
+</body>
+</html>
