@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}</style>
+<title>Бежевый интернет</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,600;1,6..72,400&family=Inter:wght@400;500&display=swap">
+<style>
+  /* Страница намеренно сделана в том самом стиле, который она разбирает:
+     одна тема, тёплая бумага, никакого переключения — так задумано. */
+  :root{
+    --cream:#faf7f0;
+    --cream-2:#f3ede1;
+    --card:#fffdf8;
+    --ink:#2b2620;
+    --ink-soft:#6b6055;
+    --ink-faint:#a2978a;
+    --rust:#c2643a;
+    --rust-deep:#9e4526;
+    --rust-glow:rgba(194,100,58,.28);
+    --rule:#e0d6c4;
+    --measure:62ch;
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:"Newsreader",Georgia,"Times New Roman",serif;
+    font-size:18px;line-height:1.68;font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:940px;margin:0 auto;padding:0 26px 100px}
+
+  /* ── приём: разряженные подзаголовки ── */
+  .tracked{
+    font-family:"Inter",system-ui,sans-serif;
+    font-size:11px;font-weight:500;
+    letter-spacing:.34em;text-transform:uppercase;
+    color:var(--rust);
+  }
+  .tracked.mute{color:var(--ink-faint)}
+
+  /* ── приём: бегущая строка ── */
+  .ticker{
+    background:var(--rust-deep);
+    overflow:hidden;white-space:nowrap;
+    border-bottom:1px solid rgba(0,0,0,.12);
+  }
+  .ticker-track{
+    display:inline-flex;gap:0;
+    animation:slide 38s linear infinite;
+    will-change:transform;
+  }
+  .ticker span{
+    font-family:"Inter",sans-serif;font-size:11px;font-weight:500;
+    letter-spacing:.24em;text-transform:uppercase;color:#f7e7dc;
+    padding:9px 0;
+  }
+  .ticker span::after{content:"◆";margin:0 26px;color:#e0a181}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){
+    .ticker-track{animation:none}
+    .ticker{text-align:center}
+  }
+
+  /* ── шапка ── */
+  header.mast{padding:60px 0 34px;border-bottom:1px solid var(--rule)}
+  header.mast h1{
+    font-family:"Instrument Serif",Georgia,serif;
+    font-weight:400;font-style:italic;
+    font-size:clamp(3.2rem,10vw,6.4rem);
+    line-height:.92;letter-spacing:-.015em;
+    margin:22px 0 0;text-wrap:balance;
+  }
+  header.mast h1 span{font-style:normal;color:var(--rust)}
+  .standfirst{
+    max-width:var(--measure);
+    font-size:1.22rem;color:var(--ink-soft);
+    margin:22px 0 0;font-weight:300;
+  }
+  .byline{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px 26px;align-items:baseline}
+
+  /* ── общая типографика ── */
+  section{padding-top:60px}
+  .sec-head{margin-bottom:28px}
+  h2{
+    font-family:"Instrument Serif",Georgia,serif;
+    font-weight:400;font-style:italic;
+    font-size:clamp(1.9rem,4.4vw,2.7rem);
+    line-height:1.06;letter-spacing:-.01em;
+    margin:10px 0 0;text-wrap:balance;
+  }
+  p{margin:0 0 1.05em;max-width:var(--measure)}
+  p:last-child{margin-bottom:0}
+  em.hl{font-style:italic;color:var(--rust-deep)}
+
+  /* ── приём: дашборд-плитки со свечением ── */
+  .tells{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(246px,1fr));
+    gap:16px;
+  }
+  .tell{
+    background:var(--card);
+    border:1px solid var(--rule);
+    border-radius:18px;
+    padding:20px 22px 22px;
+    box-shadow:0 0 0 6px rgba(255,255,255,.55),0 14px 34px -18px var(--rust-glow);
+    display:flex;flex-direction:column;gap:9px;
+    position:relative;
+  }
+  .tell::before{
+    content:"";position:absolute;inset:6px;border-radius:13px;
+    border:1px solid rgba(194,100,58,.16);pointer-events:none;
+  }
+  .tell .num{
+    font-family:"Inter",sans-serif;font-size:10.5px;font-weight:500;
+    letter-spacing:.22em;color:var(--rust);
+  }
+  .tell h3{
+    font-family:"Instrument Serif",Georgia,serif;font-weight:400;
+    font-size:1.36rem;line-height:1.15;margin:0;
+  }
+  .tell p{font-size:.98rem;color:var(--ink-soft);margin:0;font-weight:300}
+  .tell .self{
+    margin-top:4px;padding-top:9px;border-top:1px dashed var(--rule);
+    font-family:"Inter",sans-serif;font-size:10.5px;letter-spacing:.06em;
+    color:var(--ink-faint);text-transform:uppercase;
+  }
+
+  /* ── цитаты ── */
+  .voices{display:flex;flex-direction:column;gap:34px}
+  blockquote{margin:0;max-width:var(--measure)}
+  blockquote p{
+    font-family:"Instrument Serif",Georgia,serif;
+    font-style:italic;font-size:1.6rem;line-height:1.28;
+    color:var(--ink);margin:0;
+  }
+  blockquote footer{
+    margin-top:12px;
+    font-family:"Inter",sans-serif;font-size:11px;font-weight:500;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);
+  }
+
+  .admission{
+    background:var(--cream-2);
+    border:1px solid rgba(194,100,58,.35);
+    border-radius:22px;
+    padding:34px 36px;
+    box-shadow:0 18px 46px -26px var(--rust-glow);
+  }
+  .admission q{
+    display:block;quotes:none;
+    font-family:"Instrument Serif",Georgia,serif;font-style:italic;
+    font-size:clamp(1.5rem,3.6vw,2.2rem);line-height:1.2;
+    color:var(--rust-deep);text-wrap:balance;
+  }
+  .admission .src{margin:18px 0 0;color:var(--ink-soft);font-size:1rem;font-weight:300}
+
+  /* ── библиография ── */
+  ul.res{list-style:none;margin:0;padding:0}
+  ul.res li{
+    border-top:1px solid var(--rule);padding:20px 0;
+    display:grid;grid-template-columns:120px 1fr;gap:5px 24px;align-items:baseline;
+  }
+  ul.res li:last-child{border-bottom:1px solid var(--rule)}
+  ul.res a{
+    grid-column:2;
+    font-family:"Instrument Serif",Georgia,serif;font-style:italic;
+    font-size:1.42rem;line-height:1.2;
+    color:var(--ink);text-decoration:none;
+    border-bottom:1px solid var(--rust);
+  }
+  ul.res a:hover,ul.res a:focus-visible{color:var(--rust-deep)}
+  ul.res .note{grid-column:2;color:var(--ink-soft);font-size:.98rem;font-weight:300;max-width:60ch}
+  ul.res .url{
+    grid-column:2;font-family:"Inter",sans-serif;font-size:11px;
+    letter-spacing:.05em;color:var(--ink-faint);word-break:break-all;
+  }
+  a:focus-visible{outline:2px solid var(--rust);outline-offset:4px}
+
+  .fineprint{
+    margin-top:54px;padding:22px 24px;
+    background:var(--cream-2);border-radius:14px;
+    color:var(--ink-soft);font-size:.94rem;font-weight:300;max-width:var(--measure);
+  }
+  .fineprint code{font-family:"Inter",monospace;font-size:.85rem;color:var(--rust-deep)}
+
+  .colophon{
+    margin-top:40px;padding-top:22px;border-top:1px solid var(--rule);
+    max-width:var(--measure);color:var(--ink-soft);font-size:.98rem;font-weight:300;
+  }
+  .colophon strong{color:var(--rust-deep);font-weight:600}
+
+  @media (max-width:600px){
+    ul.res li{grid-template-columns:1fr}
+    ul.res a,ul.res .note,ul.res .url{grid-column:1}
+  }
+</style>
+
+</head>
+<body>
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Бежевый фон</span><span>Ржавый акцент</span><span>Крупная антиква</span><span>Курсив вместо аргумента</span><span>Разряженный трекинг</span><span>Бегущая строка</span><span>Свечение по краям</span>
+    <span>Бежевый фон</span><span>Ржавый акцент</span><span>Крупная антиква</span><span>Курсив вместо аргумента</span><span>Разряженный трекинг</span><span>Бегущая строка</span><span>Свечение по краям</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="mast">
+    <span class="tracked">Досье по одному автору &middot; собрано 4 сентября 2026</span>
+    <h1>Бежевый <span>интернет</span></h1>
+    <p class="standfirst">Кайл Чайка, штатный автор The New Yorker, описал внешность, к которой сходятся сайты, сделанные с помощью ИИ, — и указал на её источник. Здесь собрано, что именно он утверждает и где это читать. <em class="hl">Страница нарочно свёрстана в разбираемом стиле: каждый приём из списка применён к ней самой.</em></p>
+    <div class="byline">
+      <span class="tracked mute">Kyle Chayka</span>
+      <span class="tracked mute">The New Yorker &middot; рассылка Kyle Chayka Industries</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <span class="tracked">Тезис</span>
+      <h2>Один house style протёк наружу</h2>
+    </div>
+    <p>Чайка пишет не про «ИИ делает некрасиво», а про кое-что более узкое: у одной конкретной модели есть устойчивый дефолтный вкус, и этот вкус совпадает с фирменным стилем компании, которая её сделала. Поскольку модель массово используют для вёрстки лендингов, презентаций и дашбордов, домашний стиль одного вендора стал выглядеть как общий стиль сегодняшнего веба.</p>
+    <p>Автор давно занимается этим сюжетом: его книга «Filterworld» — о том, как алгоритмические платформы усредняют культуру. Нынешний текст — та же мысль, перенесённая с ленты рекомендаций на генерацию интерфейсов.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tracked">Улики</span>
+      <h2>Шесть примет — и где каждая на этой странице</h2>
+    </div>
+    <div class="tells">
+      <div class="tell">
+        <span class="num">ПРИЁМ 01 &middot; ФОН</span>
+        <h3>Бежевый и кремовый</h3>
+        <p>Не белый и не тёмно-серый — именно тёплый бумажный оттенок.</p>
+        <span class="self">Смотрите на него прямо сейчас: #faf7f0</span>
+      </div>
+      <div class="tell">
+        <span class="num">ПРИЁМ 02 &middot; ЦВЕТ</span>
+        <h3>Ржаво-оранжевый акцент</h3>
+        <p>Приглушённая терракота вместо синего или фиолетового.</p>
+        <span class="self">Все акценты страницы: #c2643a</span>
+      </div>
+      <div class="tell">
+        <span class="num">ПРИЁМ 03 &middot; ШРИФТ</span>
+        <h3>Крупная антиква с курсивом</h3>
+        <p>Засечный шрифт большого кегля, курсив как способ «подчеркнуть смысл».</p>
+        <span class="self">Все заголовки набраны Instrument Serif Italic</span>
+      </div>
+      <div class="tell">
+        <span class="num">ПРИЁМ 04 &middot; НАБОР</span>
+        <h3>Разряженные подзаголовки</h3>
+        <p>Заметный letter-spacing в мелких надписях над блоками.</p>
+        <span class="self">Надпись «УЛИКИ» выше — трекинг .34em</span>
+      </div>
+      <div class="tell">
+        <span class="num">ПРИЁМ 05 &middot; ЭЛЕМЕНТ</span>
+        <h3>Бегущая строка</h3>
+        <p>Тикер-полоса с текстом, как в кабельных новостях.</p>
+        <span class="self">Едет по верхнему краю страницы</span>
+      </div>
+      <div class="tell">
+        <span class="num">ПРИЁМ 06 &middot; ЭЛЕМЕНТ</span>
+        <h3>Дашборд со свечением</h3>
+        <p>Много вложенных скруглённых обводок с мягкой подсветкой.</p>
+        <span class="self">Плитка, которую вы читаете, — ровно такая</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tracked">Кого он цитирует</span>
+      <h2>Наблюдения дизайнеров в тексте</h2>
+    </div>
+    <div class="voices">
+      <blockquote>
+        <p>Скруглённые прямоугольные блоки дашбордов с неоновым свечением — узнаваемый повторяющийся мотив.</p>
+        <footer>David McGillivray, дизайнер — в пересказе статьи</footer>
+      </blockquote>
+      <blockquote>
+        <p>«Со вкусом подобранные, слегка перекошенные» основные цвета и приглушённые оттенки в духе mid-century modern.</p>
+        <footer>Celine Nguyen — в пересказе статьи</footer>
+      </blockquote>
+      <blockquote>
+        <p>Бежевые фоны, ржаво-красный текст, чрезмерные засечки.</p>
+        <footer>Kyle Chayka, пост в X, декабрь 2025</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tracked">Ключевая улика</span>
+      <h2>Компания признаёт это сама</h2>
+    </div>
+    <div class="admission">
+      <q>У модели сильные дизайнерские инстинкты и устойчивый дефолтный house style. Этот дефолт настойчив.</q>
+      <p class="src">Цитата из собственной документации Anthropic, которую Чайка приводит как подтверждение: описанный им набор примет — не случайность выборки, а заявленное свойство инструмента. Дальше он замечает, что перечисленные приметы совпадают с брендом самой Anthropic.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tracked">Вывод</span>
+      <h2>Дефолт достаётся тем, кто не спорит</h2>
+    </div>
+    <p>Если не давить на модель, получаешь генерик — <em class="hl">«наименьший общий приемлемый знаменатель эстетики и вкуса»</em>. Дизайнеры, с которыми говорил Чайка, считают, что отличительная работа с ИИ по-прежнему возможна, но стоит настоящего труда: мудборды, эскизы от руки, много итераций. Лечится это не выбором другой модели, а тем, что вы приносите в бриф.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="tracked">Библиография</span>
+      <h2>Где это читать</h2>
+    </div>
+    <ul class="res">
+      <li>
+        <span class="tracked mute">Первоисточник</span>
+        <a href="https://www.newyorker.com/" target="_blank" rel="noopener">The A.I.-Design Aesthetic That&rsquo;s Taking Over the Internet</a>
+        <span class="note">Основная статья в The New Yorker. Именно она ввела в оборот описание этого стиля.</span>
+        <span class="url">newyorker.com &middot; за пейволом</span>
+      </li>
+      <li>
+        <span class="tracked mute">Открытая версия</span>
+        <a href="https://kylechayka.substack.com/p/the-generic-style-of-ai-web-design" target="_blank" rel="noopener">The generic style of AI web design</a>
+        <span class="note">Его собственная рассылка: тот же материал без пейвола, с примерами. Практически весь фактический материал этой страницы — отсюда.</span>
+        <span class="url">kylechayka.substack.com/p/the-generic-style-of-ai-web-design</span>
+      </li>
+      <li>
+        <span class="tracked mute">Короткая форма</span>
+        <a href="https://x.com/chaykak/status/2069787733648723979" target="_blank" rel="noopener">Пост в X: &laquo;Beige backgrounds, rust-red text&hellip;&raquo;</a>
+        <span class="note">Формулировка в одну строку — удобно цитировать.</span>
+        <span class="url">x.com/chaykak</span>
+      </li>
+      <li>
+        <span class="tracked mute">Отклик</span>
+        <a href="https://visualgui.com/2026/06/24/a-i-web-design/" target="_blank" rel="noopener">A.I. Web Design — Visual Guidelines</a>
+        <span class="note">Разбор с позиции практикующего веб-типографа.</span>
+        <span class="url">visualgui.com/2026/06/24/a-i-web-design/</span>
+      </li>
+      <li>
+        <span class="tracked mute">Отклик</span>
+        <a href="https://www.nicksimson.com/posts/2026-the-vibes-are-off.html" target="_blank" rel="noopener">The vibes are off — Nick Simson</a>
+        <span class="note">О том, почему узнаваемость дефолта обесценивает результат в глазах читателя.</span>
+        <span class="url">nicksimson.com/posts/2026-the-vibes-are-off.html</span>
+      </li>
+      <li>
+        <span class="tracked mute">Пересказ</span>
+        <a href="https://northeasttimes.com/2026/07/31/ai-design-tools-are-making-every-website-look-the-same/" target="_blank" rel="noopener">AI design tools are making every website look the same</a>
+        <span class="note">Газетный пересказ тезиса для широкой аудитории.</span>
+        <span class="url">northeasttimes.com &middot; 31.07.2026</span>
+      </li>
+      <li>
+        <span class="tracked mute">Пересказ</span>
+        <a href="https://letsdatascience.com/news/anthropics-claude-design-shapes-new-design-aesthetic-aaf43749" target="_blank" rel="noopener">Anthropic&rsquo;s Claude Design Shapes New Design Aesthetic</a>
+        <span class="note">Новостная заметка с той же фактурой.</span>
+        <span class="url">letsdatascience.com</span>
+      </li>
+    </ul>
+
+    <p class="fineprint">Уточнение к источникам: конкретные значения, которые часто приводят рядом с этим сюжетом — фон <code>#faf9f5</code>, коралловый акцент <code>#cc785c</code>, тёмный <code>#141413</code>, шрифт Copernicus — взяты не у Чайки, а из справочников по дизайн-системе Anthropic (shadcn.io/design/claude, shadcn.io/design/anthropic). Чайка описывает приметы словами, без токенов.</p>
+
+    <p class="colophon"><strong>Колофон.</strong> Кремовый фон, ржавый акцент, крупная антиква курсивом, разряженные капители, бегущая строка и светящиеся скруглённые плитки применены здесь сознательно — как экспонат, а не как вкус. У страницы одна тема и нет тёмного режима: тёмный вариант разрушил бы предмет разговора.</p>
+  </section>
+
+</div>
+
+</body>
+</html>

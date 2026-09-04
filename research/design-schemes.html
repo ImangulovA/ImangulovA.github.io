@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>:root{color-scheme:light dark}body{margin:0}img{max-width:100%}</style>
+<title>Картотека дизайн-схем</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&display=swap">
+<style>
+  :root{
+    --paper:#f1f0ec;
+    --card:#fbfaf8;
+    --ink:#15181c;
+    --ink-soft:#535a62;
+    --ink-faint:#8d949b;
+    --rule:#d3d1ca;
+    --accent:#2340c9;
+    --accent-soft:#e2e5f7;
+    --ok:#2f6f4f;
+    --ok-soft:#dfeee6;
+    --arch:#8a6a1f;
+    --arch-soft:#f2e8ce;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#111316;
+      --card:#191c21;
+      --ink:#e8e9ec;
+      --ink-soft:#a5acb5;
+      --ink-faint:#727a83;
+      --rule:#2c3138;
+      --accent:#8ba3ff;
+      --accent-soft:#1c2340;
+      --ok:#7fc9a2;
+      --ok-soft:#16291f;
+      --arch:#d9b968;
+      --arch-soft:#2a2416;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#111316;
+    --card:#191c21;
+    --ink:#e8e9ec;
+    --ink-soft:#a5acb5;
+    --ink-faint:#727a83;
+    --rule:#2c3138;
+    --accent:#8ba3ff;
+    --accent-soft:#1c2340;
+    --ok:#7fc9a2;
+    --ok-soft:#16291f;
+    --arch:#d9b968;
+    --arch-soft:#2a2416;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Public Sans",system-ui,"Segoe UI",sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px 88px}
+  .mono{font-family:"JetBrains Mono",ui-monospace,Consolas,monospace}
+
+  header.top{
+    padding:64px 0 32px;
+    display:flex;flex-direction:column;gap:16px;
+    border-bottom:3px solid var(--ink);
+  }
+  header.top .eyebrow{
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);
+  }
+  header.top h1{
+    font-family:"Archivo",Arial,sans-serif;font-weight:700;
+    font-size:clamp(2.3rem,6vw,3.6rem);line-height:1;letter-spacing:-.03em;
+    margin:0;text-wrap:balance;
+  }
+  header.top p{margin:0;max-width:64ch;color:var(--ink-soft);font-size:1.05rem}
+
+  .legend{
+    display:flex;flex-wrap:wrap;gap:10px;
+    padding:18px 0 0;
+  }
+
+  .pill{
+    font-family:"JetBrains Mono",monospace;
+    font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+    padding:3px 8px;border-radius:2px;white-space:nowrap;
+  }
+  .pill.live{background:var(--ok-soft);color:var(--ok)}
+  .pill.arch{background:var(--arch-soft);color:var(--arch)}
+  .pill.stack{background:var(--accent-soft);color:var(--accent)}
+
+  section{padding-top:56px}
+  .sec-head{
+    display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:12px;margin-bottom:24px;
+  }
+  .sec-head h2{
+    font-family:"Archivo",Arial,sans-serif;font-weight:700;
+    font-size:1.35rem;letter-spacing:-.015em;margin:0;
+  }
+  .sec-head .count{
+    font-family:"JetBrains Mono",monospace;font-size:11px;
+    color:var(--ink-faint);letter-spacing:.1em;
+  }
+  .sec-head .blurb{flex:1 1 300px;color:var(--ink-soft);font-size:.94rem;min-width:0}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+    gap:18px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--rule);
+    display:flex;flex-direction:column;
+  }
+  .card .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:9px;flex:1}
+  .card h3{
+    font-family:"Archivo",Arial,sans-serif;font-weight:600;
+    font-size:1.08rem;margin:0;line-height:1.2;letter-spacing:-.01em;
+  }
+  .card h3 a{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--accent)}
+  .card h3 a:hover,.card h3 a:focus-visible{color:var(--accent)}
+  .card p{margin:0;font-size:.93rem;color:var(--ink-soft)}
+  .card .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+  .card .path{
+    font-family:"JetBrains Mono",monospace;font-size:11px;
+    color:var(--ink-faint);word-break:break-all;
+  }
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  /* ---------- specimens: each paints its own world ---------- */
+  .spec{
+    height:84px;
+    border-bottom:1px solid var(--rule);
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+    position:relative;
+    font-size:12px;
+  }
+  .spec-neo{background:#ffdc58}
+  .spec-neo b{
+    display:inline-block;background:#fff;color:#000;
+    font-family:"Public Sans",sans-serif;font-weight:600;font-size:13px;
+    border:2px solid #000;box-shadow:4px 4px 0 #000;padding:7px 16px;
+  }
+  .spec-retro{background:#f6e7c8}
+  .spec-retro b{
+    display:inline-block;background:#ffb84d;color:#000;
+    font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;
+    border:2px solid #000;box-shadow:3px 3px 0 #000;padding:7px 16px;
+    text-transform:uppercase;letter-spacing:.04em;
+  }
+  .spec-pixel{background:#1b1b2f}
+  .spec-pixel b{
+    font-family:"Press Start 2P",monospace;font-size:9px;color:#0f0f1a;
+    background:#7ee787;padding:9px 12px;
+    box-shadow:0 -3px 0 #7ee787,0 3px 0 #7ee787,-3px 0 0 #7ee787,3px 0 0 #7ee787,0 -6px 0 #000,0 6px 0 #000,-6px 0 0 #000,6px 0 0 #000;
+  }
+  .spec-glass{background:linear-gradient(120deg,#3f5efb,#fc466b)}
+  .spec-glass b{
+    background:rgba(255,255,255,.22);
+    border:1px solid rgba(255,255,255,.5);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    color:#fff;font-weight:600;font-size:13px;
+    padding:9px 20px;border-radius:12px;
+  }
+  .spec-os{background:#008080;padding:0 14px;align-items:center;justify-content:stretch}
+  .spec-os .win{
+    width:100%;background:#c0c0c0;
+    border-top:2px solid #fff;border-left:2px solid #fff;
+    border-right:2px solid #444;border-bottom:2px solid #444;
+    padding:2px;
+  }
+  .spec-os .bar{
+    background:linear-gradient(90deg,#000080,#1084d0);
+    color:#fff;font-family:"JetBrains Mono",monospace;font-size:10px;
+    padding:2px 5px;display:flex;justify-content:space-between;
+  }
+  .spec-os .cnt{
+    color:#000;font-family:"Public Sans",sans-serif;font-size:11px;
+    padding:8px 6px 10px;
+  }
+  .spec-term{background:#08120c;justify-content:flex-start;padding:0 16px}
+  .spec-term b{
+    font-family:"JetBrains Mono",monospace;font-weight:400;
+    color:#3dff8a;font-size:12px;text-shadow:0 0 6px rgba(61,255,138,.55);
+  }
+  .spec-term i{
+    display:inline-block;width:8px;height:14px;background:#3dff8a;
+    vertical-align:-2px;margin-left:3px;animation:blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0}}
+  @media (prefers-reduced-motion:reduce){.spec-term i{animation:none}}
+  .spec-vapor{
+    background:linear-gradient(180deg,#2b1055 0%,#7b2ff7 55%,#ff6ec7 100%);
+  }
+  .spec-vapor::after{
+    content:"";position:absolute;inset:auto 0 0 0;height:46px;
+    background:
+      repeating-linear-gradient(90deg,rgba(0,255,255,.5) 0 1px,transparent 1px 22px),
+      repeating-linear-gradient(0deg,rgba(0,255,255,.5) 0 1px,transparent 1px 12px);
+  }
+  .spec-vapor b{
+    position:relative;z-index:1;
+    font-family:"Archivo",sans-serif;font-weight:700;font-size:15px;
+    color:#fff;letter-spacing:.35em;text-transform:uppercase;
+    text-shadow:2px 2px 0 #ff2d95,-2px -2px 0 #00e5ff;
+  }
+  .spec-md{background:#111;justify-content:flex-start;padding:0 16px}
+  .spec-md b{font-family:"JetBrains Mono",monospace;font-size:11px;color:#c9d1d9;font-weight:400}
+  .spec-md b span{color:#ff7b72}
+  .spec-arena{background:#efeeea;gap:8px;padding:0 14px}
+  .spec-arena i{
+    flex:1;height:44px;border:1px solid #22252a;background:#fff;
+    position:relative;
+  }
+  .spec-arena i::before{
+    content:"";position:absolute;left:8px;right:8px;top:9px;height:6px;background:#22252a;
+  }
+  .spec-arena i::after{
+    content:"";position:absolute;left:8px;right:24px;bottom:10px;height:14px;background:#c8ccd4;
+  }
+  .spec-arena i.win{background:#2340c9}
+  .spec-arena i.win::before{background:#fff}
+  .spec-arena i.win::after{background:rgba(255,255,255,.55);right:14px}
+
+  /* ---------- families list ---------- */
+  ul.fam{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+  ul.fam li{background:var(--card);padding:14px 16px;display:flex;flex-direction:column;gap:5px}
+  ul.fam .nm{font-family:"Archivo",sans-serif;font-weight:600;font-size:.98rem;display:flex;align-items:center;gap:8px}
+  ul.fam .sw{width:11px;height:11px;border-radius:50%;flex:none;border:1px solid rgba(0,0,0,.2)}
+  ul.fam .ref{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-faint)}
+
+  footer.end{
+    margin-top:64px;padding-top:22px;border-top:1px solid var(--rule);
+    color:var(--ink-faint);font-size:.88rem;max-width:70ch;
+  }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <span class="eyebrow">Библиотека визуальных направлений &middot; сентябрь 2026</span>
+    <h1>Картотека дизайн-схем</h1>
+    <p>Готовые open source схемы, которыми можно заменить дефолтный вид проекта — так же, как раньше заменялся нео-брутализм. Каждая карточка: чем это является, на чём собрано, живо ли ещё.</p>
+    <div class="legend">
+      <span class="pill live">поддерживается</span>
+      <span class="pill arch">архив / без поддержки</span>
+      <span class="pill stack">стек</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <h2>Нео-брутализм</h2>
+      <span class="count">5 проектов</span>
+      <span class="blurb">Исходный neobrutalism.dev больше не развивается; экосистема переехала в форки и порты.</span>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="spec spec-neo"><b>Кнопка</b></div>
+        <div class="body">
+          <h3><a href="https://www.neobrutalism.dev/docs" target="_blank" rel="noopener">neobrutalism.dev</a></h3>
+          <p>Первоисточник схемы: жёсткие чёрные обводки, смещённая сплошная тень, кислотные заливки. Документация по-прежнему полезна как справочник токенов.</p>
+          <span class="path">neobrutalism.dev/docs</span>
+          <div class="meta"><span class="pill arch">не поддерживается</span><span class="pill stack">shadcn/ui</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="spec spec-retro"><b>Retro UI</b></div>
+        <div class="body">
+          <h3><a href="https://retroui.dev/" target="_blank" rel="noopener">RetroUI</a></h3>
+          <p>Сейчас основная замена: 50+ компонентов, 158+ блоков и шаблонов, 7 тем через переменные shadcn. Самый безопасный выбор, если нужен нео-брутализм в новом проекте.</p>
+          <span class="path">retroui.dev &middot; блог: /blog/neobrutalism-dev-alternative</span>
+          <div class="meta"><span class="pill live">поддерживается</span><span class="pill stack">React + Tailwind + Radix/Base UI</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="spec spec-neo"><b>Компонент</b></div>
+        <div class="body">
+          <h3><a href="https://github.com/ekmas/neobrutalism-components" target="_blank" rel="noopener">neobrutalism-components</a></h3>
+          <p>Набор компонентов прямо поверх shadcn/ui, около 5.2k звёзд. Ставится в существующий проект без миграции.</p>
+          <span class="path">github.com/ekmas/neobrutalism-components</span>
+          <div class="meta"><span class="pill live">живой</span><span class="pill stack">React + shadcn/ui</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="spec spec-neo"><b>Vue / Svelte</b></div>
+        <div class="body">
+          <h3><a href="https://github.com/topics/neobrutalism" target="_blank" rel="noopener">neobrutalism-vue &middot; neobrutalism-svelte</a></h3>
+          <p>Порты той же схемы: Vue-реестр Tailwind-компонентов и версия поверх shadcn-svelte.</p>
+          <span class="path">github.com/topics/neobrutalism</span>
+          <div class="meta"><span class="pill stack">Vue &middot; Svelte</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="spec spec-neo"><b>Angular</b></div>
+        <div class="body">
+          <h3><a href="https://github.com/topics/neubrutalism" target="_blank" rel="noopener">ng-brutalism</a></h3>
+          <p>Нео-брутализм для Angular на сигналах, zoneless, Tailwind v4. Редкий случай — большинство наборов только под React.</p>
+          <span class="path">github.com/topics/neubrutalism</span>
+          <div class="meta"><span class="pill stack">Angular 18+ &middot; Tailwind v4</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Пиксель и 8-бит</h2>
+      <span class="count">2 проекта</span>
+      <span class="blurb">Ближайший родственник брутализма: тоже жёсткие края, но игровая интонация.</span>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="spec spec-pixel"><b>START</b></div>
+        <div class="body">
+          <h3><a href="https://github.com/TheOrcDev/8bitcn-ui" target="_blank" rel="noopener">8bitcn/ui</a></h3>
+          <p>Ретро-компоненты с пиксельными границами и геймпадной логикой элементов, ~1.9k звёзд. Структура один в один как у shadcn/ui — можно подменять покомпонентно.</p>
+          <span class="path">8bitcn.com &middot; github.com/TheOrcDev/8bitcn-ui</span>
+          <div class="meta"><span class="pill live">поддерживается</span><span class="pill stack">Next.js + TS + shadcn/ui</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="spec spec-pixel"><b>PIXEL</b></div>
+        <div class="body">
+          <h3><a href="https://github.com/pixelact-ui/pixelact-ui" target="_blank" rel="noopener">Pixelact UI</a></h3>
+          <p>Пиксель-арт реестр компонентов поверх shadcn/ui. Мягче и «игрушечнее» 8bitcn, больше цвета.</p>
+          <span class="path">github.com/pixelact-ui/pixelact-ui</span>
+          <div class="meta"><span class="pill live">живой</span><span class="pill stack">React + shadcn/ui</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Стекло</h2>
+      <span class="count">2 проекта</span>
+      <span class="blurb">Полная противоположность брутализму: размытие, прозрачность, мягкие тени. Помнить, что это же — верхняя строчка списка примет «ИИ-дизайна».</span>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="spec spec-glass"><b>Панель</b></div>
+        <div class="body">
+          <h3><a href="https://shadcntemplates.com/theme/itsjavi-glasscn-ui" target="_blank" rel="noopener">Glasscn UI</a></h3>
+          <p>Библиотека компонентов shadcn/ui с glassmorphism-вариантами и дополнительными элементами. Совместима с обычным shadcn — стекло включается вариантом.</p>
+          <span class="path">github.com/itsjavi/glasscn-ui</span>
+          <div class="meta"><span class="pill stack">React + Tailwind</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="spec spec-glass"><b>59 компонентов</b></div>
+        <div class="body">
+          <h3><a href="https://github.com/artyhoo/shadcn-glass-ui-library" target="_blank" rel="noopener">shadcn-glass-ui-library</a></h3>
+          <p>59 компонентов, 3 темы, заявлена нулевая миграция — ставится поверх существующего shadcn-проекта.</p>
+          <span class="path">github.com/artyhoo/shadcn-glass-ui-library</span>
+          <div class="meta"><span class="pill stack">React + shadcn/ui</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Ретро-ОС и терминал</h2>
+      <span class="count">7 проектов</span>
+      <span class="blurb">Чистый CSS без React — подключается тегом и работает где угодно, включая статические страницы и отчёты.</span>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="spec spec-os">
+          <div class="win">
+            <div class="bar"><span>readme.txt</span><span>_ □ ×</span></div>
+            <div class="cnt">Окно как в 1998-м</div>
+          </div>
+        </div>
+        <div class="body">
+          <h3><a href="https://jdan.github.io/98.css/" target="_blank" rel="noopener">98.css &middot; XP.css &middot; 7.css</a></h3>
+          <p>Три родственные библиотеки: интерфейсы Windows 98, XP и 7 — фаски, серый металл, системные диалоги. Хороши для инструментов и «служебных» страниц.</p>
+          <span class="path">jdan.github.io/98.css &middot; botoxparty.github.io/XP.css &middot; khang-nd.github.io/7.css</span>
+          <div class="meta"><span class="pill live">живые</span><span class="pill stack">чистый CSS</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="spec spec-pixel"><b>NES</b></div>
+        <div class="body">
+          <h3><a href="https://github.com/nostalgic-css/NES.css" target="_blank" rel="noopener">NES.css &middot; PSone.css</a></h3>
+          <p>Консольная эстетика: NES.css — восьмибитная, PSone.css сделана по её образцу под PlayStation 1. Только CSS, без зависимостей.</p>
+          <span class="path">github.com/nostalgic-css/NES.css</span>
+          <div class="meta"><span class="pill stack">чистый CSS</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="spec spec-term"><b>&gt; make build<i></i></b></div>
+        <div class="body">
+          <h3><a href="https://github.com/matt-auckland/retro-css" target="_blank" rel="noopener">TuiCss &middot; terminal.css</a></h3>
+          <p>TuiCss воспроизводит интерфейсы MS-DOS (синие панели, псевдографика), terminal.css — аккуратный моноширинный «терминальный» стиль для текстовых сайтов и документации.</p>
+          <span class="path">Сводный список ретро-фреймворков: github.com/matt-auckland/retro-css</span>
+          <div class="meta"><span class="pill stack">чистый CSS</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="spec spec-vapor"><b>aesthetic</b></div>
+        <div class="body">
+          <h3><a href="https://github.com/torch2424/aesthetic-css" target="_blank" rel="noopener">aesthetic-css</a></h3>
+          <p>Вейпорвейв-фреймворк: неоновые градиенты, сетка-перспектива, хромированный текст. Единственная схема в списке, которая полностью отказывается от сдержанности.</p>
+          <span class="path">github.com/torch2424/aesthetic-css</span>
+          <div class="meta"><span class="pill stack">чистый CSS</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="spec spec-md"><b><span>##</span> awesome-css-frameworks</b></div>
+        <div class="body">
+          <h3><a href="https://github.com/troxler/awesome-css-frameworks" target="_blank" rel="noopener">awesome-css-frameworks</a></h3>
+          <p>Общий каталог CSS-фреймворков с указанием размера, лицензии и активности — отсюда удобно искать схему, которой ещё нет в этой картотеке.</p>
+          <span class="path">github.com/troxler/awesome-css-frameworks</span>
+          <div class="meta"><span class="pill live">обновляется</span><span class="pill stack">список</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Схемы как контекст для агента</h2>
+      <span class="count">2 репозитория</span>
+      <span class="blurb">Не библиотеки компонентов, а текстовые описания стиля, которые кладутся в проект и задают вид генерируемого кода.</span>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="spec spec-md"><b><span>#</span> DESIGN.md &mdash; 73+ брендов</b></div>
+        <div class="body">
+          <h3><a href="https://github.com/voltagent/awesome-design-md" target="_blank" rel="noopener">awesome-design-md</a></h3>
+          <p>73+ готовых файла DESIGN.md, снятых с реальных сайтов: Linear, Stripe, Notion, Supabase, PostHog, Figma, Apple, Nike, Tesla, плюс ретро-веб вроде Dell 1996 и Nintendo 2001. Кладётся в проект — агент верстает в этом стиле. Модель-агностично.</p>
+          <span class="path">github.com/voltagent/awesome-design-md</span>
+          <div class="meta"><span class="pill live">пополняется</span><span class="pill stack">Markdown</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="spec spec-md"><b><span>#</span> 9 визуальных семейств</b></div>
+        <div class="body">
+          <h3><a href="https://github.com/rohitg00/awesome-claude-design" target="_blank" rel="noopener">awesome-claude-design</a></h3>
+          <p>Систематизирует девять визуальных направлений с референсами (список ниже) и отдельно перечисляет дефолты, которые стоит запрещать промптом: тиловый акцент везде, мигающие статус-точки, вложенные карточки, декоративные полоски слева, сетки из трёх фича-блоков.</p>
+          <span class="path">github.com/rohitg00/awesome-claude-design</span>
+          <div class="meta"><span class="pill live">пополняется</span><span class="pill stack">Markdown</span></div>
+        </div>
+      </article>
+
+    </div>
+
+    <ul class="fam" style="margin-top:18px">
+      <li><span class="nm"><span class="sw" style="background:#e8e6e1"></span>Editorial Minimalism</span><span class="ref">Linear &middot; Stripe &middot; Vercel</span></li>
+      <li><span class="nm"><span class="sw" style="background:#0b0f0c"></span>Terminal-Core</span><span class="ref">Ollama &middot; Warp</span></li>
+      <li><span class="nm"><span class="sw" style="background:#c8734a"></span>Warm Editorial</span><span class="ref">Anthropic &middot; Notion</span></li>
+      <li><span class="nm"><span class="sw" style="background:#f5c518"></span>Data-Dense Pro</span><span class="ref">ClickHouse &middot; PostHog</span></li>
+      <li><span class="nm"><span class="sw" style="background:#1a1a22"></span>Cinematic Dark</span><span class="ref">RunwayML &middot; NVIDIA</span></li>
+      <li><span class="nm"><span class="sw" style="background:#ff5c8a"></span>Playful Color</span><span class="ref">Figma &middot; Duolingo</span></li>
+      <li><span class="nm"><span class="sw" style="background:#9fc7f0"></span>Glass / Soft-Futurism</span><span class="ref">Apple &middot; Arc</span></li>
+      <li><span class="nm"><span class="sw" style="background:#d6ff2e"></span>Neon Brutalist</span><span class="ref">The Verge &middot; Pitchfork</span></li>
+      <li><span class="nm"><span class="sw" style="background:#7a1f1f"></span>Cult / Indie</span><span class="ref">Criterion &middot; A24</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Где сравнивать</h2>
+      <span class="count">2 площадки</span>
+      <span class="blurb">Если нужен внешний аргумент, какая модель лучше справляется с визуальной задачей.</span>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="spec spec-arena"><i></i><i class="win"></i></div>
+        <div class="body">
+          <h3><a href="https://www.designarena.ai/leaderboard/code" target="_blank" rel="noopener">Design Arena</a></h3>
+          <p>Слепое парное голосование по одинаковому промпту, Elo-лидерборды по категориям: сайты, UI-компоненты, геймдев, дата-виз, 3D. Названия моделей скрыты до голоса.</p>
+          <span class="path">designarena.ai/leaderboard/code</span>
+          <div class="meta"><span class="pill live">обновляется</span><span class="pill stack">бенчмарк</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="spec spec-arena"><i class="win"></i><i></i></div>
+        <div class="body">
+          <h3><a href="https://arena.ai/leaderboard" target="_blank" rel="noopener">WebDev Arena</a></h3>
+          <p>То же самое, но задачи ближе к реальной фронтенд-работе, а не к «сделай красиво».</p>
+          <span class="path">arena.ai/leaderboard</span>
+          <div class="meta"><span class="pill live">обновляется</span><span class="pill stack">бенчмарк</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <footer class="end">
+    Собрано 4 сентября 2026 по итогам поискового ресерча. Статусы проектов («поддерживается» / «архив») взяты из описаний в источниках и могут устареть — перед выбором стоит посмотреть дату последнего коммита. Полный текстовый отчёт со ссылками лежит рядом в репозитории: <span class="mono">notes-ai-design-2026-09-04.md</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
