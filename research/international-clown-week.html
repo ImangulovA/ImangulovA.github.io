@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>International Clown Week — разбор пакета по реакциям</title>
+<style>
+  :root {
+    color-scheme: light;
+    --paper: #f3efe3;
+    --paper-edge: #e7e1d0;
+    --card: #fcfcfb;
+    --ink: #16140f;
+    --ink-2: #52514e;
+    --muted: #898781;
+    --rule: #c3c2b7;
+    --grid: #e1e0d9;
+    --accent: #b41f2b;
+    --blue: #2a78d6;
+    --orange: #eb6834;
+    --ring: rgba(11, 11, 11, 0.10);
+    --display: Impact, "Haettenschweiler", "Arial Narrow Bold", "Arial Narrow", sans-serif;
+    --sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; }
+
+  .canopy {
+    height: 14px;
+    background: repeating-linear-gradient(135deg,
+      var(--accent) 0 22px, #f7f4ec 22px 44px);
+    border-bottom: 1px solid var(--paper-edge);
+  }
+
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(44px, 8vw, 92px);
+    line-height: 0.94;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    text-wrap: balance;
+    margin: 14px 0 0;
+  }
+
+  h2 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  h3 { font-size: 17px; margin: 0; line-height: 1.3; }
+
+  p { margin: 0; max-width: 68ch; }
+
+  header.hero { padding: 56px 0 40px; }
+  .hero .lede { margin-top: 22px; font-size: 19px; color: var(--ink-2); }
+
+  .hero-figure {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-top: 34px;
+    padding-top: 26px;
+    border-top: 3px solid var(--ink);
+  }
+  .hero-figure .num {
+    font-family: var(--display);
+    font-size: clamp(64px, 12vw, 132px);
+    line-height: 0.82;
+    letter-spacing: -0.01em;
+    color: var(--accent);
+  }
+  .hero-figure .cap { font-size: 15px; color: var(--ink-2); max-width: 34ch; }
+
+  section { padding: 44px 0; border-top: 1px solid var(--paper-edge); }
+  .section-head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 26px; }
+
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+  }
+  .tile {
+    background: var(--card);
+    border: 1px solid var(--ring);
+    border-radius: 3px;
+    padding: 18px 18px 16px;
+  }
+  .tile .v {
+    font-family: var(--display);
+    font-size: 40px;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .tile .k {
+    margin-top: 8px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--ring);
+    border-radius: 3px;
+    padding: 22px;
+  }
+  .panel + .panel { margin-top: 16px; }
+  .panel-title { font-size: 15px; font-weight: 650; margin: 0 0 2px; }
+  .panel-note { font-size: 13px; color: var(--muted); margin: 0 0 16px; max-width: 72ch; }
+
+  .chart-scroll { overflow-x: auto; }
+  svg { display: block; width: 100%; height: auto; }
+  .ax { font-size: 12px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+  .ax-title { font-size: 12px; fill: var(--ink-2); letter-spacing: 0.06em; text-transform: uppercase; }
+  .dot { stroke: var(--card); stroke-width: 2; cursor: pointer; }
+  .dot:hover { stroke: var(--ink); }
+  .dot-label { font-size: 11px; fill: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .bar { cursor: pointer; }
+  .bar-value { font-size: 12px; fill: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; margin: 0 0 14px; font-size: 13px; color: var(--ink-2); }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .swatch { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+
+  .quad { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .quad .panel { padding: 18px; }
+  .quad h3 { font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .quad .sub { font-size: 12px; color: var(--muted); margin: 5px 0 12px; }
+  .quad ul { margin: 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .quad li { font-size: 13px; display: flex; gap: 8px; align-items: baseline; }
+  .quad .qn {
+    font-variant-numeric: tabular-nums;
+    font-weight: 650;
+    min-width: 30px;
+    color: var(--ink);
+  }
+  .quad .qa { color: var(--ink-2); }
+
+  .rail { width: 3px; border-radius: 2px; align-self: stretch; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--grid); }
+  th {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  tbody tr:hover { background: #f6f4ee; }
+  .minibar { display: inline-block; height: 7px; border-radius: 4px; background: var(--blue); vertical-align: middle; }
+  .minibar-track { display: inline-block; width: 74px; height: 7px; border-radius: 4px; background: var(--grid); vertical-align: middle; margin-right: 8px; }
+
+  .tip {
+    position: fixed;
+    pointer-events: none;
+    background: var(--ink);
+    color: #fff;
+    padding: 9px 11px;
+    border-radius: 3px;
+    font-size: 12.5px;
+    line-height: 1.45;
+    max-width: 260px;
+    opacity: 0;
+    transition: opacity 0.12s;
+    z-index: 20;
+  }
+  .tip.on { opacity: 1; }
+  .tip b { font-weight: 650; }
+
+  .prose { display: flex; flex-direction: column; gap: 14px; color: var(--ink-2); }
+  .prose strong { color: var(--ink); }
+
+  footer { padding: 40px 0 64px; border-top: 3px solid var(--ink); color: var(--muted); font-size: 13px; }
+  footer p { max-width: 78ch; }
+  footer .prose { gap: 10px; }
+
+  a { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="canopy"></div>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">International Clown Week · 36 вопросов · 91 команда · 96 подписчиков канала</p>
+    <h1>Реакции в канале не измеряют сложность</h1>
+    <p class="lede">
+      В канале пакета у каждого вопроса две независимые оценки: процент взятий на турнире
+      и эмодзи-реакции читателей. Логично ждать, что лёгкие вопросы нравятся больше — и
+      это не подтверждается. Связь между взятиями и долей позитивных реакций практически
+      нулевая.
+    </p>
+    <div class="hero-figure">
+      <div class="num" id="heroR">—</div>
+      <div class="cap">
+        корреляция Пирсона между процентом взятий и долей позитивных реакций.
+        По рангам Спирмена — <b id="heroRho">—</b>. Обе величины малы: на выборке
+        в 36 вопросов такая связь статистически не значима.
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="section-head">
+      <h2>Что в пакете</h2>
+    </div>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Взятия против симпатии</h2>
+      <p>
+        Каждая точка — вопрос. По горизонтали процент команд, взявших вопрос, по вертикали
+        доля позитивных реакций от всех реакций под постом. Размер точки — сколько всего
+        реакций собрал пост. Пунктир — медианы.
+      </p>
+    </div>
+    <div class="panel">
+      <p class="panel-title">36 вопросов пакета</p>
+      <p class="panel-note">
+        Если бы симпатия следовала за сложностью, точки выстроились бы вдоль диагонали.
+        Вместо этого они заполняют всё поле: вопросы с 2% взятий встречаются и среди
+        стопроцентно любимых, и среди самых нелюбимых.
+      </p>
+      <div class="chart-scroll"><svg id="scatter" viewBox="0 0 900 470" role="img"
+        aria-label="Диаграмма рассеяния: процент взятий против доли позитивных реакций"></svg></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Четыре угла манежа</h2>
+      <p>
+        Деление по медианам: <b id="medTakes">—</b> взятий и <b id="medShare">—</b> позитива.
+        Интересны углы, где две оценки расходятся.
+      </p>
+    </div>
+    <div class="quad" id="quad"></div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Редакторы</h2>
+      <p>
+        Шесть редакторов, по шесть вопросов на каждого. Ковёрный клоун Серпински открывал
+        и закрывал турнир и вёл сквозную линию — вопросы 1, 8, 15, 22, 29 и 36.
+      </p>
+    </div>
+    <div class="panel">
+      <p class="panel-title">Доля позитива и процент взятий, в среднем на вопрос</p>
+      <p class="panel-note">
+        Обе величины — проценты, поэтому лежат на одной шкале и сравнимы напрямую.
+      </p>
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--blue)"></i>доля позитивных реакций</span>
+        <span><i class="swatch" style="background:var(--orange)"></i>процент взятий</span>
+      </div>
+      <div class="chart-scroll"><svg id="editors" viewBox="0 0 900 400" role="img"
+        aria-label="Столбчатая диаграмма по редакторам"></svg></div>
+    </div>
+    <div class="panel">
+      <div class="chart-scroll">
+        <table id="editorTable">
+          <thead>
+            <tr>
+              <th>Редактор</th>
+              <th>Автор</th>
+              <th>Вопросы</th>
+              <th class="num">Взятия</th>
+              <th class="num">Позитив</th>
+              <th class="num">Реакций/вопрос</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Чем именно реагировали</h2>
+      <p>
+        470 реакций на 55 постах канала. Палец вниз — третья по популярности реакция:
+        аудитория пользовалась ей охотно, и это делает долю позитива осмысленной мерой.
+      </p>
+    </div>
+    <div class="panel">
+      <p class="panel-title">Все реакции канала</p>
+      <div class="chart-scroll"><svg id="mix" viewBox="0 0 900 360" role="img"
+        aria-label="Частота реакций"></svg></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Все 36 вопросов</h2>
+      <p>Полная таблица: сортировка по номеру вопроса.</p>
+    </div>
+    <div class="panel">
+      <div class="chart-scroll">
+        <table id="qTable">
+          <thead>
+            <tr>
+              <th class="num">№</th>
+              <th>Редактор</th>
+              <th>Ответ</th>
+              <th class="num">Взятия</th>
+              <th class="num">Реакций</th>
+              <th class="num">Позитив / негатив</th>
+              <th>Доля позитива</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="prose">
+      <p><b>Как собраны данные.</b> Реакции и метаданные постов выгружены из Telegram
+      через MTProto-клиент под аккаунтом владельца канала. Тексты вопросов вместе со
+      статистикой взятий взяты из веб-клиента Telegram: посты содержат раскрывающийся
+      блок «Ответ», и по API текст таких постов приходил пустым.</p>
+      <p><b>Как считалось.</b> Позитивные реакции: 👍 🔥 ❤ 👌 🥰 💘. Негативные: 👎 🥱 😐.
+      Остальные (🤯 😱 🤔 🌚 🐳 💊) в долю не входят, но учтены в общем числе реакций.
+      Доля позитива — позитивные от суммы позитивных и негативных.</p>
+      <p><b>Осторожно с выводами.</b> 36 вопросов и около 75 просмотров на пост — выборка
+      маленькая, реакции оставляли единицы читателей, и это не те же люди, что играли
+      турнир. Различия между редакторами в 10–15 процентных пунктов на таком объёме
+      могут быть шумом.</p>
+    </div>
+  </footer>
+</div>
+
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+
+<script>
+const DATA = {"questions":[{"q":1,"e":"Серпински","t":89,"s":66.7,"p":6,"n":3,"tot":9,"a":"сломанной ноги","r":{"❤":3,"👌":3,"🥱":3}},{"q":2,"e":"Рингмисс","t":7,"s":90.9,"p":10,"n":1,"tot":17,"a":"задаёт первый вопрос","r":{"👍":7,"🤯":4,"❤":3,"😱":2,"👎":1}},{"q":3,"e":"Рингмисс","t":97,"s":85.7,"p":12,"n":2,"tot":14,"a":"посмертная маска","r":{"👍":7,"👌":4,"🥱":2,"❤":1}},{"q":4,"e":"Рингмисс","t":3,"s":73.3,"p":11,"n":4,"tot":15,"a":"the Onion","r":{"❤":7,"👎":4,"👍":2,"🔥":1,"👌":1}},{"q":5,"e":"Рингмисс","t":16,"s":90.0,"p":18,"n":2,"tot":20,"a":"шабесго́я","r":{"🔥":7,"👍":6,"❤":4,"👎":2,"👌":1}},{"q":6,"e":"Рингмисс","t":23,"s":86.7,"p":13,"n":2,"tot":17,"a":"концерт Sonic youth [соник юс]","r":{"❤":6,"👍":6,"👎":2,"🤯":2,"🔥":1}},{"q":7,"e":"Рингмисс","t":2,"s":80.0,"p":8,"n":2,"tot":12,"a":"Дэвид Фостер Уоллес","r":{"❤":5,"👎":2,"🔥":2,"😱":2,"👌":1}},{"q":8,"e":"Серпински","t":36,"s":100.0,"p":9,"n":0,"tot":9,"a":"dio","r":{"❤":4,"👌":3,"👍":2}},{"q":9,"e":"Чиполла","t":25,"s":69.2,"p":9,"n":4,"tot":13,"a":"[[имя и] фамилия ведущего]","r":{"👌":4,"👎":3,"🔥":3,"👍":2,"😐":1}},{"q":10,"e":"Чиполла","t":34,"s":50.0,"p":6,"n":6,"tot":12,"a":"в часе","r":{"👎":6,"👍":3,"🔥":3}},{"q":11,"e":"Чиполла","t":24,"s":100.0,"p":15,"n":0,"tot":15,"a":"[футбольная] лига","r":{"👍":9,"🔥":5,"👌":1}},{"q":12,"e":"Чиполла","t":26,"s":29.4,"p":5,"n":12,"tot":18,"a":"ȹ ȸ (в любом порядке)","r":{"👎":12,"🔥":4,"👌":1,"🆒":1}},{"q":13,"e":"Чиполла","t":8,"s":33.3,"p":2,"n":4,"tot":11,"a":"красный коридор","r":{"🤯":5,"👎":4,"🔥":1,"🥰":1}},{"q":14,"e":"Чиполла","t":54,"s":90.0,"p":9,"n":1,"tot":11,"a":"[нужно нарисовать вокруг названия прямоугольную рамочку]","r":{"👍":5,"🔥":2,"👌":2,"😱":1,"🥱":1}},{"q":15,"e":"Серпински","t":41,"s":90.9,"p":10,"n":1,"tot":11,"a":"Clippy [кли́пи]","r":{"👍":6,"🔥":4,"👎":1}},{"q":16,"e":"Нил Фэйлбэттэр","t":2,"s":60.0,"p":3,"n":2,"tot":6,"a":"Беркли","r":{"👍":2,"👎":2,"❤":1,"🤔":1}},{"q":17,"e":"Нил Фэйлбэттэр","t":11,"s":100.0,"p":8,"n":0,"tot":8,"a":"[Каспар Давид] Фридрих","r":{"❤":6,"👍":1,"👌":1}},{"q":18,"e":"Нил Фэйлбэттэр","t":2,"s":27.3,"p":3,"n":8,"tot":11,"a":"Лаки","r":{"👎":8,"❤":3}},{"q":19,"e":"Нил Фэйлбэттэр","t":79,"s":63.6,"p":7,"n":4,"tot":11,"a":"плачущие ангелы","r":{"🔥":4,"👎":3,"👌":2,"❤":1,"🥱":1}},{"q":20,"e":"Нил Фэйлбэттэр","t":21,"s":42.9,"p":6,"n":8,"tot":18,"a":"воображаемая покерная партия","r":{"👎":8,"🔥":4,"😱":2,"❤":1,"👍":1,"🤯":1,"🤮":1}},{"q":21,"e":"Нил Фэйлбэттэр","t":30,"s":100.0,"p":8,"n":0,"tot":8,"a":"Толли","r":{"👍":5,"👌":2,"❤":1}},{"q":22,"e":"Серпински","t":34,"s":100.0,"p":10,"n":0,"tot":10,"a":"станцевать на его могиле","r":{"🔥":6,"👍":3,"👌":1}},{"q":23,"e":"Микки Блисс","t":2,"s":25.0,"p":2,"n":6,"tot":13,"a":"судебной ботанике","r":{"👎":6,"😱":5,"❤":2}},{"q":24,"e":"Микки Блисс","t":53,"s":100.0,"p":6,"n":0,"tot":6,"a":"[закон] о [трёх] колосках","r":{"👍":5,"👌":1}},{"q":25,"e":"Микки Блисс","t":95,"s":30.0,"p":3,"n":7,"tot":10,"a":"калибр","r":{"🥱":7,"👍":1,"🔥":1,"👌":1}},{"q":26,"e":"Микки Блисс","t":32,"s":100.0,"p":17,"n":0,"tot":21,"a":"Kraftwerk","r":{"🔥":11,"❤":6,"🌚":2,"🤯":1,"😴":1}},{"q":27,"e":"Микки Блисс","t":46,"s":100.0,"p":14,"n":0,"tot":14,"a":"Heroes of Might and Magic","r":{"🔥":9,"👍":5}},{"q":28,"e":"Микки Блисс","t":71,"s":60.0,"p":6,"n":4,"tot":11,"a":"масон","r":{"🥱":4,"👍":3,"🔥":2,"😱":1,"👌":1}},{"q":29,"e":"Серпински","t":23,"s":91.7,"p":11,"n":1,"tot":12,"a":"camp","r":{"🔥":9,"👍":1,"👎":1,"🥰":1}},{"q":30,"e":"Пеннифартинг","t":42,"s":85.7,"p":12,"n":2,"tot":17,"a":"мочевой поводок","r":{"👍":7,"👎":2,"🥰":2,"🐳":2,"💘":2,"🤯":1,"👌":1}},{"q":31,"e":"Пеннифартинг","t":4,"s":28.6,"p":2,"n":5,"tot":17,"a":"YTP","r":{"👎":5,"🤯":5,"💊":5,"❤":2}},{"q":32,"e":"Пеннифартинг","t":8,"s":0.0,"p":0,"n":7,"tot":13,"a":"1. Сэмпл Стромаё","r":{"👎":7,"😱":5,"🤯":1}},{"q":33,"e":"Пеннифартинг","t":15,"s":76.9,"p":10,"n":3,"tot":13,"a":"Кало, Эмин","r":{"👍":5,"👎":3,"🔥":3,"👌":2}},{"q":34,"e":"Пеннифартинг","t":69,"s":66.7,"p":6,"n":3,"tot":9,"a":"месячные привлекут акулу","r":{"👌":5,"👎":3,"❤":1}},{"q":35,"e":"Пеннифартинг","t":29,"s":80.0,"p":12,"n":3,"tot":15,"a":"рекарнавализация","r":{"👍":9,"👎":3,"👌":3}},{"q":36,"e":"Серпински","t":31,"s":100.0,"p":19,"n":0,"tot":20,"a":"айл джаст сэй ватс ин май харт","r":{"🔥":10,"👍":5,"❤":3,"🤔":1,"👌":1}}],"editors":[{"name":"Серпински","person":"Алексей Бороненко","takes":42.333333333333336,"share":91.55,"reactions":11.833333333333334,"pos":65,"neg":5,"questions":[1,8,15,22,29,36]},{"name":"Рингмисс","person":"Юлия Дидбаридзе","takes":24.666666666666668,"share":84.43333333333334,"reactions":15.833333333333334,"pos":72,"neg":13,"questions":[2,3,4,5,6,7]},{"name":"Чиполла","person":"Евгений Капитульский","takes":28.5,"share":61.983333333333334,"reactions":13.333333333333334,"pos":46,"neg":27,"questions":[9,10,11,12,13,14]},{"name":"Нил Фэйлбэттэр","person":"Антон Ботев","takes":24.166666666666668,"share":65.63333333333334,"reactions":10.333333333333334,"pos":35,"neg":22,"questions":[16,17,18,19,20,21]},{"name":"Микки Блисс","person":"Сергей Никольский","takes":49.833333333333336,"share":69.16666666666667,"reactions":12.5,"pos":48,"neg":17,"questions":[23,24,25,26,27,28]},{"name":"Пеннифартинг","person":"Амаль Имангулов","takes":27.833333333333332,"share":56.31666666666667,"reactions":14,"pos":42,"neg":23,"questions":[30,31,32,33,34,35]}],"stats":{"n":36,"r_share":0.1459400758549835,"r_total":-0.2436683324203378,"r_pos":0.061313745918293146,"r_neg":-0.08185886804180047,"rho_share":0.26206795935313537,"med_takes":27.5,"med_share":80.0,"mean_takes":32.888888888888886,"min_takes":2,"max_takes":97,"teams":91,"total_reactions":470,"reactions_on_q":467,"avg_reactions":12.972222222222221,"avg_views":75.38888888888889,"posts":55,"mix":{"👍":109,"🔥":93,"👎":88,"❤":60,"👌":42,"🤯":20,"🥱":18,"😱":18,"💊":5,"🥰":4,"🤔":2,"🌚":2,"🐳":2,"💘":2,"😐":1,"🆒":1,"🤮":1,"😴":1,"👏":1}}};
+
+const BLUE = '#2a78d6', ORANGE = '#eb6834', GRID = '#e1e0d9',
+      BASE = '#c3c2b7', CARD = '#fcfcfb', INK2 = '#52514e';
+const NS = 'http://www.w3.org/2000/svg';
+
+const el = (tag, attrs = {}, text) => {
+  const n = document.createElementNS(NS, tag);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  if (text != null) n.textContent = text;
+  return n;
+};
+const fmt = v => (Math.round(v * 10) / 10).toString().replace('.', ',');
+
+/* ——— подсказка ——— */
+const tip = document.getElementById('tip');
+function showTip(e, html) {
+  tip.innerHTML = html;
+  tip.classList.add('on');
+  const pad = 14, r = tip.getBoundingClientRect();
+  let x = e.clientX + pad, y = e.clientY + pad;
+  if (x + r.width > innerWidth - 8) x = e.clientX - r.width - pad;
+  if (y + r.height > innerHeight - 8) y = e.clientY - r.height - pad;
+  tip.style.left = x + 'px';
+  tip.style.top = y + 'px';
+}
+const hideTip = () => tip.classList.remove('on');
+function bindTip(node, html) {
+  node.addEventListener('mousemove', e => showTip(e, html));
+  node.addEventListener('mouseleave', hideTip);
+}
+
+/* ——— шапка ——— */
+const S = DATA.stats;
+const sign = v => (v >= 0 ? '+' : '−') + fmt(Math.abs(v)).replace(',', ',');
+document.getElementById('heroR').textContent = sign(S.r_share);
+document.getElementById('heroRho').textContent = sign(S.rho_share);
+document.getElementById('medTakes').textContent = fmt(S.med_takes) + '%';
+document.getElementById('medShare').textContent = fmt(S.med_share) + '%';
+
+/* ——— плитки ——— */
+const tiles = [
+  [S.n, 'вопросов в пакете'],
+  [fmt(S.med_takes) + '%', 'медиана взятий'],
+  [S.min_takes + '–' + S.max_takes + '%', 'разброс взятий'],
+  [fmt(S.avg_reactions), 'реакций на вопрос'],
+  [S.reactions_on_q, 'реакций под вопросами'],
+  [Math.round(S.avg_views), 'просмотров у поста'],
+];
+document.getElementById('tiles').innerHTML = tiles
+  .map(([v, k]) => `<div class="tile"><div class="v">${v}</div><div class="k">${k}</div></div>`)
+  .join('');
+
+/* ——— диаграмма рассеяния ——— */
+(function scatter() {
+  const svg = document.getElementById('scatter');
+  const W = 900, H = 470, L = 62, R = 26, T = 26, B = 58;
+  const x = v => L + (v / 100) * (W - L - R);
+  const y = v => H - B - (v / 100) * (H - B - T);
+
+  for (let v = 0; v <= 100; v += 25) {
+    svg.appendChild(el('line', { x1: L, x2: W - R, y1: y(v), y2: y(v),
+      stroke: GRID, 'stroke-width': 1 }));
+    svg.appendChild(el('text', { x: L - 12, y: y(v) + 4, 'text-anchor': 'end',
+      class: 'ax' }, v + '%'));
+    svg.appendChild(el('text', { x: x(v), y: H - B + 22, 'text-anchor': 'middle',
+      class: 'ax' }, v + '%'));
+  }
+  svg.appendChild(el('line', { x1: L, x2: W - R, y1: y(0), y2: y(0),
+    stroke: BASE, 'stroke-width': 1 }));
+
+  [[S.med_takes, 'v'], [S.med_share, 'h']].forEach(([v, dir]) => {
+    svg.appendChild(el('line', dir === 'v'
+      ? { x1: x(v), x2: x(v), y1: T, y2: H - B }
+      : { x1: L, x2: W - R, y1: y(v), y2: y(v) },
+      ));
+    const ln = svg.lastChild;
+    ln.setAttribute('stroke', BASE);
+    ln.setAttribute('stroke-width', 1);
+    ln.setAttribute('stroke-dasharray', '5 5');
+  });
+
+  svg.appendChild(el('text', { x: L, y: H - 10, class: 'ax-title' }, 'Взятия'));
+  svg.appendChild(el('text', { x: 16, y: T + 6, class: 'ax-title',
+    transform: `rotate(-90 16 ${T + 6})`, 'text-anchor': 'end' }, 'Доля позитива'));
+
+  const maxTot = Math.max(...DATA.questions.map(q => q.tot));
+  const LABELS = { 2: 'r', 3: 'l', 17: 'r', 19: 'l', 23: 'r', 25: 'l', 26: 'r', 32: 'r' };
+
+  DATA.questions.forEach(q => {
+    const rad = 4.5 + (q.tot / maxTot) * 5.5;
+    const dot = el('circle', { cx: x(q.t), cy: y(q.s), r: rad, fill: BLUE,
+      'fill-opacity': 0.85, class: 'dot' });
+    bindTip(dot, `<b>Вопрос ${q.q}</b> · ${q.e}<br>${q.a}<br>
+      взятия ${q.t}% · позитив ${fmt(q.s)}%<br>${q.p} за, ${q.n} против, ${q.tot} реакций`);
+    svg.appendChild(dot);
+
+    if (LABELS[q.q]) {
+      const right = LABELS[q.q] === 'r';
+      svg.appendChild(el('text', {
+        x: x(q.t) + (right ? rad + 6 : -rad - 6),
+        y: y(q.s) + 4,
+        'text-anchor': right ? 'start' : 'end',
+        class: 'dot-label',
+      }, '№' + q.q));
+    }
+  });
+})();
+
+/* ——— углы ——— */
+(function quadrants() {
+  const mt = S.med_takes, ms = S.med_share;
+  const box = (title, sub, color, filter, sortFn) => {
+    const items = DATA.questions.filter(filter).sort(sortFn);
+    return `<div class="panel" style="display:flex;gap:14px">
+      <div class="rail" style="background:${color}"></div>
+      <div style="flex:1">
+        <h3>${title}</h3>
+        <p class="sub">${sub} · ${items.length} шт.</p>
+        <ul>${items.map(q => `<li><span class="qn">№${q.q}</span>
+          <span class="qa">${q.a} — взятия ${q.t}%, позитив ${fmt(q.s)}%</span></li>`).join('')}</ul>
+      </div></div>`;
+  };
+  document.getElementById('quad').innerHTML = [
+    box('Любят, но не берут', 'сложные и при этом высоко оценённые', BLUE,
+      q => q.t < mt && q.s >= ms, (a, b) => b.s - a.s || a.t - b.t),
+    box('Берут и любят', 'по обеим оценкам в плюсе', '#1baf7a',
+      q => q.t >= mt && q.s >= ms, (a, b) => b.s - a.s || b.t - a.t),
+    box('Берут, но не любят', 'простые и прохладно принятые', ORANGE,
+      q => q.t >= mt && q.s < ms, (a, b) => a.s - b.s),
+    box('Ни того, ни другого', 'не взяли и не оценили', '#d03b3b',
+      q => q.t < mt && q.s < ms, (a, b) => a.s - b.s),
+  ].join('');
+})();
+
+/* ——— редакторы ——— */
+(function editorsChart() {
+  const svg = document.getElementById('editors');
+  const W = 900, H = 400, L = 56, R = 20, T = 20, B = 76;
+  const y = v => H - B - (v / 100) * (H - B - T);
+  const band = (W - L - R) / DATA.editors.length;
+  const bw = 30;
+
+  for (let v = 0; v <= 100; v += 25) {
+    svg.appendChild(el('line', { x1: L, x2: W - R, y1: y(v), y2: y(v),
+      stroke: v === 0 ? BASE : GRID, 'stroke-width': 1 }));
+    svg.appendChild(el('text', { x: L - 12, y: y(v) + 4, 'text-anchor': 'end',
+      class: 'ax' }, v + '%'));
+  }
+
+  const roundedTop = (bx, by, w, h, r) => {
+    r = Math.min(r, h);
+    return `M${bx},${by + h} L${bx},${by + r} Q${bx},${by} ${bx + r},${by}
+            L${bx + w - r},${by} Q${bx + w},${by} ${bx + w},${by + r}
+            L${bx + w},${by + h} Z`;
+  };
+
+  DATA.editors.forEach((e, i) => {
+    const cx = L + band * i + band / 2;
+    [[e.share, BLUE, 'доля позитива', -bw - 1], [e.takes, ORANGE, 'взятия', 1]]
+      .forEach(([val, color, label, dx]) => {
+        const bx = cx + dx, by = y(val), h = y(0) - by;
+        const p = el('path', { d: roundedTop(bx, by, bw, h, 4), fill: color, class: 'bar' });
+        bindTip(p, `<b>${e.name}</b><br>${label}: ${fmt(val)}%`);
+        svg.appendChild(p);
+        svg.appendChild(el('text', { x: bx + bw / 2, y: by - 7,
+          'text-anchor': 'middle', class: 'bar-value' }, Math.round(val) + '%'));
+      });
+
+    e.name.split(' ').forEach((word, k) => {
+      svg.appendChild(el('text', { x: cx, y: H - B + 22 + k * 15,
+        'text-anchor': 'middle', class: 'ax' }, word));
+    });
+  });
+})();
+
+/* ——— таблица редакторов ——— */
+document.querySelector('#editorTable tbody').innerHTML = DATA.editors.map(e => `
+  <tr>
+    <td>${e.name}</td>
+    <td>${e.person}</td>
+    <td class="num">${e.questions.join(', ')}</td>
+    <td class="num">${fmt(e.takes)}%</td>
+    <td class="num">${fmt(e.share)}%</td>
+    <td class="num">${fmt(e.reactions)}</td>
+  </tr>`).join('');
+
+/* ——— палитра реакций ——— */
+(function mixChart() {
+  const svg = document.getElementById('mix');
+  const entries = Object.entries(S.mix).slice(0, 12);
+  const W = 900, L = 116, R = 60, T = 10;
+  const rowH = 26, H = T + entries.length * rowH + 12;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const max = entries[0][1];
+  const w = v => (v / max) * (W - L - R);
+
+  entries.forEach(([emoji, count], i) => {
+    const yy = T + i * rowH;
+    svg.appendChild(el('text', { x: L - 14, y: yy + 15, 'text-anchor': 'end',
+      class: 'ax', 'font-size': 15 }, emoji));
+    const bw = Math.max(w(count), 3), bh = 14;
+    const p = el('path', {
+      d: `M${L},${yy + 4} L${L + bw - 4},${yy + 4} Q${L + bw},${yy + 4} ${L + bw},${yy + 8}
+          L${L + bw},${yy + 4 + bh - 4} Q${L + bw},${yy + 4 + bh} ${L + bw - 4},${yy + 4 + bh}
+          L${L},${yy + 4 + bh} Z`,
+      fill: BLUE, class: 'bar',
+    });
+    bindTip(p, `<b>${emoji}</b> ${count} раз`);
+    svg.appendChild(p);
+    svg.appendChild(el('text', { x: L + bw + 10, y: yy + 15, class: 'bar-value' }, count));
+  });
+})();
+
+/* ——— таблица вопросов ——— */
+document.querySelector('#qTable tbody').innerHTML = DATA.questions.map(q => `
+  <tr>
+    <td class="num">${q.q}</td>
+    <td>${q.e}</td>
+    <td>${q.a}</td>
+    <td class="num">${q.t}%</td>
+    <td class="num">${q.tot}</td>
+    <td class="num">${q.p} / ${q.n}</td>
+    <td><span class="minibar-track"><span class="minibar" style="width:${q.s * 0.74}px"></span></span>${fmt(q.s)}%</td>
+  </tr>`).join('');
+</script>
+
+</body>
+</html>
