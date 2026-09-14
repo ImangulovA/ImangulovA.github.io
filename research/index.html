@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibe-coded Analyses &middot; Amal Imangulov</title>
+<style>
+:root {
+  --bg:#0a0e1a; --card-bg:#151d30; --card-bg-hover:#1a2440; --border:#1e293b;
+  --text:#e2e8f0; --text-muted:#94a3b8; --text-dim:#64748b;
+  --accent:#1877F2; --accent-glow:rgba(24,119,242,0.15);
+  --green:#02e2ac; --green-dim:rgba(2,226,172,0.12);
+  --orange:#f59e0b; --orange-dim:rgba(245,158,11,0.12);
+  --purple:#a855f7; --purple-dim:rgba(168,85,247,0.12);
+  --hero-from:#0a0e1a; --hero-to:#162544;
+}
+[data-theme="light"] {
+  --bg:#fafbfc; --card-bg:#ffffff; --card-bg-hover:#f0f2f5; --border:#e4e6ea;
+  --text:#1a1a2e; --text-muted:#4a5568; --text-dim:#718096;
+  --accent:#1877F2; --accent-glow:rgba(24,119,242,0.08);
+  --green:#02c39b; --green-dim:rgba(2,195,155,0.08);
+  --orange:#e08a00; --orange-dim:rgba(224,138,0,0.08);
+  --purple:#7c3aed; --purple-dim:rgba(124,58,237,0.08);
+  --hero-from:#e8f0fe; --hero-to:#d2e3fc;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.6;transition:background .3s,color .3s}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+.theme-toggle{position:fixed;top:18px;right:18px;z-index:20;width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--border);background:var(--card-bg);color:var(--text);cursor:pointer;font-size:16px}
+
+.hero{background:linear-gradient(160deg,var(--hero-from),var(--hero-to));
+  border-bottom:1px solid var(--border);padding-block:64px 52px}
+.hero .inner{max-width:1040px;margin:0 auto;padding:0 20px}
+.back{display:inline-block;font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text-dim);margin-bottom:20px}
+h1{font-size:clamp(30px,5.5vw,46px);line-height:1.1;letter-spacing:-.02em}
+h1 span{color:var(--accent)}
+.subtitle{color:var(--text-muted);margin-top:14px;max-width:62ch;font-size:17px}
+
+.container{max-width:1040px;margin:0 auto;padding:0 20px;padding-block:44px 72px}
+.section-title{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);
+  margin:0 0 18px;font-weight:600}
+.section-title + .section-title,h2.section-title.later{margin-top:48px}
+
+.projects{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.project-card{display:block;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;
+  padding:20px;color:var(--text);transition:background .2s,border-color .2s,transform .2s}
+.project-card:hover{background:var(--card-bg-hover);border-color:var(--accent);
+  text-decoration:none;transform:translateY(-2px)}
+.project-card.featured{grid-column:1/-1;background:linear-gradient(135deg,var(--card-bg),var(--accent-glow))}
+.card-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.card-icon{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:18px;flex:none}
+.icon-accent{background:var(--accent-glow);color:var(--accent)}
+.icon-green{background:var(--green-dim);color:var(--green)}
+.icon-orange{background:var(--orange-dim);color:var(--orange)}
+.icon-purple{background:var(--purple-dim);color:var(--purple)}
+.card-header h3{font-size:17px;line-height:1.25;letter-spacing:-.01em}
+.project-card p{color:var(--text-muted);font-size:14.5px}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.tag{font-size:11.5px;letter-spacing:.04em;padding:3px 9px;border-radius:99px;border:1px solid var(--border);
+  color:var(--text-dim)}
+.tag-data{color:var(--accent);border-color:var(--accent-glow);background:var(--accent-glow)}
+.tag-viz{color:var(--purple);border-color:var(--purple-dim);background:var(--purple-dim)}
+.tag-live{color:var(--green);border-color:var(--green-dim);background:var(--green-dim)}
+.tag-quiz{color:var(--orange);border-color:var(--orange-dim);background:var(--orange-dim)}
+
+.note{color:var(--text-dim);font-size:14px;max-width:70ch;margin-top:32px;
+  border-top:1px solid var(--border);padding-top:20px}
+footer{border-top:1px solid var(--border);color:var(--text-dim);font-size:13px;
+  text-align:center;padding-block:26px}
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme"><span id="theme-icon">&#9790;</span></button>
+
+<section class="hero">
+  <div class="inner">
+    <a class="back" href="/">&larr; Amal Imangulov</a>
+    <h1>Vibe-coded <span>Analyses</span></h1>
+    <p class="subtitle">Small research pages built the fast way: pull the data, read all of it, then ship one self-contained page. Culture, design and quiz corpora, mostly. Each one is a finished argument, not a dashboard.</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <h2 class="section-title">Culture &amp; media</h2>
+  <div class="projects">
+
+    <a class="project-card featured" href="/research/researchfromt-style.html">
+      <div class="card-header">
+        <div class="card-icon icon-accent">&#9997;</div>
+        <h3>Anatomy of a Telegram Channel</h3>
+      </div>
+      <p>The full corpus of a Russian UX-research channel &mdash; 107 posts, 291k characters &mdash; scraped and measured to reverse-engineer one author&rsquo;s voice: the seven-step post skeleton, seven hook types, the inventory of theorists she leans on, emoji as list markers, and the anti-patterns that give a fake away.</p>
+      <div class="tags">
+        <span class="tag tag-data">corpus</span>
+        <span class="tag tag-viz">style analysis</span>
+        <span class="tag">RU</span>
+        <span class="tag tag-live">live</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="/research/ai-design-aesthetic-en.html">
+      <div class="card-header">
+        <div class="card-icon icon-orange">&#128240;</div>
+        <h3>The Beige Internet</h3>
+      </div>
+      <p>What Kyle Chayka actually claims about the AI look taking over the web: the six tells, the designers he quotes, the vendor&rsquo;s own admission. Set in that very style, as its own exhibit.</p>
+      <div class="tags">
+        <span class="tag tag-viz">design</span>
+        <span class="tag tag-data">EN</span>
+        <span class="tag tag-live">live</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="/research/ai-design-aesthetic.html">
+      <div class="card-header">
+        <div class="card-icon icon-orange">&#128240;</div>
+        <h3>Бежевый интернет</h3>
+      </div>
+      <p>Русская версия разбора: что именно Кайл Чайка утверждает про «ИИ-эстетику», какие шесть признаков он перечисляет и кого цитирует.</p>
+      <div class="tags">
+        <span class="tag tag-viz">design</span>
+        <span class="tag tag-data">RU</span>
+        <span class="tag tag-live">live</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="/research/design-schemes.html">
+      <div class="card-header">
+        <div class="card-icon icon-purple">&#128203;</div>
+        <h3>Картотека дизайн-схем</h3>
+      </div>
+      <p>Open source visual schemes to swap a project into &mdash; neo-brutalism, pixel, glass, retro-OS, terminal, vaporwave &mdash; each with a live specimen, its stack and whether it is still maintained.</p>
+      <div class="tags">
+        <span class="tag tag-viz">design</span>
+        <span class="tag tag-data">reference</span>
+        <span class="tag tag-live">live</span>
+      </div>
+    </a>
+
+  </div>
+
+  <h2 class="section-title later">Quiz data</h2>
+  <div class="projects">
+
+    <a class="project-card" href="/research/international-clown-week.html">
+      <div class="card-header">
+        <div class="card-icon icon-accent">&#129313;</div>
+        <h3>International Clown Week</h3>
+      </div>
+      <p>Do readers like the questions they can answer? A 36-question package scored two ways &mdash; tournament solve rates against Telegram emoji reactions. Spoiler: the two barely correlate.</p>
+      <div class="tags">
+        <span class="tag tag-data">data</span>
+        <span class="tag tag-viz">visualization</span>
+        <span class="tag tag-quiz">quiz</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="/chgk-vocab/">
+      <div class="card-header">
+        <div class="card-icon icon-green">&#128218;</div>
+        <h3>Лексикон ЧГК</h3>
+      </div>
+      <p>Vocabulary richness of quiz-question authors. 6,701 packs, 436k questions, 149 reliable authors, ranked in one interactive infographic.</p>
+      <div class="tags">
+        <span class="tag tag-data">data</span>
+        <span class="tag tag-viz">infographic</span>
+        <span class="tag tag-live">live</span>
+      </div>
+    </a>
+
+    <a class="project-card" href="/standup-research/">
+      <div class="card-header">
+        <div class="card-icon icon-orange">&#127908;</div>
+        <h3>Stand-up Lexicon</h3>
+      </div>
+      <p>How rich is the vocabulary of Russian stand-up comics? 321 concerts scraped and lemmatised, measured on a 25k-lemma metric, ranked head to head.</p>
+      <div class="tags">
+        <span class="tag tag-data">data</span>
+        <span class="tag tag-viz">infographic</span>
+        <span class="tag tag-live">live</span>
+      </div>
+    </a>
+
+  </div>
+
+  <p class="note">Working notes also live here, unpolished: <a href="/research/notes-ai-design-2026-09-04.md">notes on AI design aesthetics</a> (markdown).</p>
+
+</div>
+
+<footer>Amal Imangulov &middot; 2025</footer>
+
+<script>
+function toggleTheme(){
+  const html=document.documentElement;
+  const next=html.getAttribute('data-theme')==='dark'?'light':'dark';
+  html.setAttribute('data-theme',next);
+  try{localStorage.setItem('theme',next);}catch(e){}
+  document.getElementById('theme-icon').innerHTML=next==='dark'?'&#9790;':'&#9728;';
+}
+(function(){
+  let saved=null;
+  try{saved=localStorage.getItem('theme');}catch(e){}
+  if(saved){
+    document.documentElement.setAttribute('data-theme',saved);
+    document.getElementById('theme-icon').innerHTML=saved==='dark'?'&#9790;':'&#9728;';
+  }
+})();
+</script>
+</body>
+</html>
